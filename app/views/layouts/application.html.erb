@@ -11,6 +11,70 @@
   </head>
 
   <body>
+  <header>
+    <div class="container">
+      <ul class="headnav">
+      <!-- 管理者がログインしている場合-->
+        <% if admin_signed_in? %>
+          <li>
+            <%= link_to "会員一覧", admin_users_path %>
+          </li>
+
+          <li>
+            <%= link_to "投稿一覧", admin_post_recipes_path %>
+          </li>
+
+          <li>
+            <%= link_to "カテゴリ一覧", admin_categories_path %>
+          </li>
+
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path %>
+          </li>
+
+      <!--ユーザー（会員）がログインしている場合 -->
+        <% elsif user_signed_in? %>
+          <li>
+            <%= link_to "投稿一覧", post_recipes_path %>
+          </li>
+
+          <li>
+            <%= link_to "マイページ", user_path %>
+          </li>
+
+          <li>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+
+      <!-- ログインしていない場合 -->
+        <% else %>
+          <li>
+            <%= link_to "投稿一覧", post_recipes_path %>
+          </li>
+
+          <li>
+            <%= link_to "新規登録", new_user_registration_path %>
+          </li>
+
+          <li>
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </header>
+
+  <main>
     <%= yield %>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <p>プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
+      </div>
+    </div>
+  </footer>
+
   </body>
 </html>
