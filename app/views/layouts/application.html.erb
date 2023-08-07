@@ -29,7 +29,7 @@
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
           </li>
 
       <!--ユーザー（会員）がログインしている場合 -->
@@ -39,7 +39,7 @@
           </li>
 
           <li>
-            <%= link_to "マイページ", user_path %>
+            <%= link_to "マイページ", user_path(current_user) %>
           </li>
 
           <li>
