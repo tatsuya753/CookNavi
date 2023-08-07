@@ -3,8 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-
+         
+         
+  has_many :post_recipes, dependent: :destroy
+  has_many :recipe_comments, dependent: :destroy
+  has_many :keeps, dependent: :destroy
+  
+  
   # ゲストログイン情報
   GUEST_USER_EMAIL = "guest@guest"
 
