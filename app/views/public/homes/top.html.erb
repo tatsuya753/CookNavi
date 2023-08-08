@@ -1,2 +1,8 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+新着投稿一覧
+
+<% @post_recipes.each do |post_recipe| %>
+  <div class="m-5">
+    <div><%= image_tag post_recipe.get_image(300, 300) %></div>
+    <div><%= post_recipe.user.name %></div>
+  </div>
+<% end %>
