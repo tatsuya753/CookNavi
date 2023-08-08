@@ -1,2 +1,43 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <h3 class="text-center mt-5", style="margin:auto; width:200px;">会員一覧</h3>
+    <div class="col-10 mx-auto">
+      <table class="table mt-5">
+      <thead  class="table-secondary">
+        <tr>
+          <th>登録日</th>
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+             <td>
+                <%= user.created_at.strftime('%Y/%m/%d') %>
+             </td>
+             <td>
+                <%= user.id %>
+             </td>
+             <td>
+                <%= user.name %>
+             </td>
+             <td>
+                <%= user.email %>
+             </td>
+             <td>
+                <% if user.is_deleted == true%>
+                  <p class="text-danger">退会済</p>
+                <% else %>
+                  <p class="text-success">有効</p>
+                <% end %>
+             </td>
+         </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

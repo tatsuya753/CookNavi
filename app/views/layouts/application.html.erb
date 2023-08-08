@@ -6,62 +6,63 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
   <header>
-    <div class="container">
-      <ul class="headnav">
+    <nav class="navbar navbar-expand-lg border-bottom">
+      <div><h2 class="logo"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2></div>
+        <ul class="navbar-nav ml-auto">
       <!-- 管理者がログインしている場合-->
         <% if admin_signed_in? %>
           <li>
-            <%= link_to "会員一覧", admin_users_path %>
+            <%= link_to "会員一覧", admin_users_path, class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "投稿一覧", admin_post_recipes_path %>
+            <%= link_to "投稿一覧", admin_post_recipes_path, class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "カテゴリ一覧", admin_categories_path %>
+            <%= link_to "カテゴリ一覧", admin_categories_path, class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-dark ml-5 mr-5" %>
           </li>
 
       <!--ユーザー（会員）がログインしている場合 -->
         <% elsif user_signed_in? %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path %>
+            <%= link_to "投稿一覧", post_recipes_path, class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "マイページ", user_path(current_user) %>
+            <%= link_to "マイページ", user_path(current_user), class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-dark ml-5 mr-5" %>
           </li>
 
       <!-- ログインしていない場合 -->
         <% else %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path %>
+            <%= link_to "投稿一覧", post_recipes_path, class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "新規登録", new_user_registration_path %>
+            <%= link_to "新規登録", new_user_registration_path, class: "text-dark ml-5" %>
           </li>
 
           <li>
-            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "ログイン", new_user_session_path ,class: "text-dark ml-5 mr-5" %>
           </li>
         <% end %>
       </ul>
-    </div>
+    </nav>
   </header>
 
   <main>
@@ -70,9 +71,7 @@
 
   <footer>
     <div class="container">
-      <div class="row">
-        <p>プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
-      </div>
+      <p class="text-center">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
     </div>
   </footer>
 
