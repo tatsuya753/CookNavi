@@ -1,5 +1,12 @@
 マイページ
 
+<div class="m-5">
+  <%= image_tag @user.get_profile_image(200, 200) %>
+  <h3><%= @user.name %></h3>
+</div>
+
+<%= link_to "プロフィール編集", edit_user_path(current_user), class: 'btn btn-md btn-success text-white' %>
+<%= link_to "レシピ投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
 
 <!--ゲストユーザーは非表示-->
 <%# unless user.guest_user? %>
