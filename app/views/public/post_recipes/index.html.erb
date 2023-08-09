@@ -1,5 +1,5 @@
 投稿一覧
-
+<%= link_to "新規投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
 <% @post_recipes.each do |post_recipe| %>
   <div class="m-5">
     <%= link_to post_recipe_path(post_recipe) do %>
