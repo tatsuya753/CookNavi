@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_070029) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.integer "post_recipes_id"
+    t.integer "post_recipe_id"
     t.string "name"
     t.integer "amount"
     t.datetime "created_at", precision: 6, null: false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_070029) do
   end
 
   create_table "procedures", force: :cascade do |t|
-    t.integer "post_recipes_id"
+    t.integer "post_recipe_id"
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

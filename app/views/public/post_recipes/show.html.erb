@@ -1,0 +1,17 @@
+投稿詳細
+  <div class="m-5">
+    <div><%= image_tag @post_recipe.get_image(300, 300) %></div>
+    <div><%= @post_recipe.user.name %></div>
+    <div><%= @post_recipe.title %></div>
+    <div><%= @post_recipe.introduction %></div>
+    <div><%= @post_recipe.serving %></div>
+
+    <% @post_recipe.ingredients.each do |ingredient| %>
+      <div><%= ingredient.name %></div>
+      <div><%= ingredient.amount %></div>
+    <% end %>
+
+    <% @post_recipe.procedures.each do |procedure| %>
+      <div><%= procedure.body %></div>
+    <% end %>
+  </div>
