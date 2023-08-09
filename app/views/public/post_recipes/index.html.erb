@@ -2,7 +2,9 @@
 
 <% @post_recipes.each do |post_recipe| %>
   <div class="m-5">
+    <%= link_to post_recipe_path(post_recipe) do %>
     <div><%= image_tag post_recipe.get_image(300, 300) %></div>
+    <% end %>
     <div><%= post_recipe.user.name %></div>
   </div>
 <% end %>

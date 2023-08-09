@@ -1,7 +1,7 @@
 
 <h1>新規投稿</h1>
 <%= form_with model: @post_recipe, local:true do |f| %>
-
+<div class="m-5">
   <h4>画像</h4>
   <%= f.file_field :image, accept: "image/*" %>
 
@@ -23,7 +23,7 @@
       </div>
 
       <div class="row">
-          <%= fields_for :ingredients do |ingredient| %>
+          <%= f.fields_for :ingredients do |ingredient| %>
             <h6>材料・調味料</h6>
               <%= ingredient.text_area :name, placeholder: "例）にんじん" %>
             <h6>分量</h6>
@@ -35,7 +35,7 @@
         <h4>つくり方</h4>
 
       <div class="row">
-        <%= fields_for :procedures do |procedure| %>
+        <%= f.fields_for :procedures do |procedure| %>
           <%= procedure.text_field :body, placeholder:"手順を記入" %>
         <% end %>
       </div>
@@ -45,4 +45,5 @@
         <%= f.submit 'レシピを公開' %>
       </div>
     </div>
+</div>
 <% end %>

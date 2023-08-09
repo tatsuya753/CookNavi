@@ -5,10 +5,14 @@ class Public::PostRecipesController < ApplicationController
   end
 
   def show
+    @post_recipe = PostRecipe.find(params[:id])
+    @ingredient = Ingredient.all
   end
 
   def new
     @post_recipe = PostRecipe.new
+    @post_recipe.ingredients.build
+    @post_recipe.procedures.build
   end
 
   def create
