@@ -6,7 +6,6 @@ class Public::PostRecipesController < ApplicationController
 
   def show
     @post_recipe = PostRecipe.find(params[:id])
-    @ingredient = Ingredient.all
   end
 
   def new

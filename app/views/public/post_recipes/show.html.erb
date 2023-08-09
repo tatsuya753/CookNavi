@@ -6,7 +6,7 @@
     <div><%= @post_recipe.introduction %></div>
     <div><%= @post_recipe.serving %></div>
 
-    <% @ingredient.each do |ingredient| %>
+    <% @post_recipe.ingredients.each do |ingredient| %>
       <div><%= ingredient.name %></div>
       <div><%= ingredient.amount %></div>
     <% end %>
