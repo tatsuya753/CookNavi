@@ -14,12 +14,8 @@ class PostRecipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients, allow_destroy: true
   
   def get_image(width, height)
-      if image.attached?
-         image
-      else
-        'no_image.jpg'
-      end
-    image.variant(resize_to_limit: [width, height]).processed
+      image
+      image.variant(resize_to_limit: [width, height]).processed
   end
   
 end

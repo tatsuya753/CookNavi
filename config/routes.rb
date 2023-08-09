@@ -29,7 +29,14 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    resources :users
+      resources :users do
+        collection do
+          # 退会確認画面
+          get  '/users/check' => 'users#check'
+          # 論理削除用のルーティング
+          patch  '/users/withdraw' => 'users#withdraw'
+        end
+      end
     resources :post_recipes
     resources :recipe_comments
     resources :keeps
