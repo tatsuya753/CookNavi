@@ -18,16 +18,23 @@ class Public::PostRecipesController < ApplicationController
     @post_recipe = PostRecipe.new(post_recipe_params)
     @post_recipe.user_id = current_user.id
     @post_recipe.save
-    redirect_to post_recipes_path
+    redirect_to post_recipe_path(@post_recipe.id)
   end
 
   def edit
+    @post_recipe = PostRecipe.find(params[:id])
   end
 
   def update
+    post_recipe = PostRecipe.find(params[:id])
+    post_recipe.update(post_recipe_params)
+    redirect_to post_recipe_path
   end
 
   def destroy
+    post_recipe = PostRecipe.find(params[:id])
+    post_recipe.destroy
+    redirect_to post_recipes_path
   end
 
 private
@@ -41,8 +48,8 @@ private
       :serving,
       :post_status,
       :image,
-      procedures_attributes: [:body, :_destroy],
-      ingredients_attributes: [:name, :amount, :_destroy]
+      procedures_attributes: [:body, :_destroy, :id],
+      ingredients_attributes: [:name, :amount, :_destroy, :id]
     )
   end
 

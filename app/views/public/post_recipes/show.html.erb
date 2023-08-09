@@ -1,17 +1,27 @@
 投稿詳細
   <div class="m-5">
     <div><%= image_tag @post_recipe.get_image(300, 300) %></div>
-    <div><%= @post_recipe.user.name %></div>
+    <div>by<%= @post_recipe.user.name %></div>
+    <h3>カテゴリ</h3>
+    <div><%= @post_recipe.category.name %></div>
+    <h3>料理名</h3>
     <div><%= @post_recipe.title %></div>
+    <h3>料理紹介</h3>
     <div><%= @post_recipe.introduction %></div>
-    <div><%= @post_recipe.serving %></div>
 
+    <h4><%= @post_recipe.serving %>人前<h4>
+
+      <h3>材料・分量</h3>
     <% @post_recipe.ingredients.each do |ingredient| %>
       <div><%= ingredient.name %></div>
       <div><%= ingredient.amount %></div>
     <% end %>
 
+      <h3>作り方</h3>
     <% @post_recipe.procedures.each do |procedure| %>
       <div><%= procedure.body %></div>
     <% end %>
+
+    <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
+    <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white', "data-confirm" => "本当に削除しますか？" %>
   </div>
