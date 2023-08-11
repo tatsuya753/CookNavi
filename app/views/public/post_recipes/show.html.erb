@@ -22,6 +22,8 @@
       <div><%= procedure.body %></div>
     <% end %>
 
+    <%= render 'keeps', post_recipe: @post_recipe %>
+
     <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
     <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white', "data-confirm" => "本当に削除しますか？" %>
   </div>
