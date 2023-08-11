@@ -18,7 +18,7 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   # ゲストログイン情報
   GUEST_USER_EMAIL = "guest@guest"
 

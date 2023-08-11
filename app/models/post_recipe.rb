@@ -18,4 +18,7 @@ class PostRecipe < ApplicationRecord
       image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def kept_by?(user)
+    keeps.exists?(user_id: user.id)
+  end
 end

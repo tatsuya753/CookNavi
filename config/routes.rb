@@ -38,9 +38,10 @@ Rails.application.routes.draw do
           patch  '/users/withdraw' => 'users#withdraw'
         end
       end
-    resources :post_recipes
-    resources :recipe_comments
-    resources :keeps
+    resources :post_recipes do
+    resources :recipe_comments, only: [:create, :destroy]
+    resource :keeps, only: [:create, :destroy]
+  end
   end
 
 end
