@@ -1,9 +1,19 @@
 投稿一覧
+<table class="m-5">
+  <tr>
+    <th class="text-center genre-head">カテゴリから探す</th>
+  </tr>
+  <% @categories.each do |category| %>
+  <tr class="text-center"><td><%= link_to category.name, post_recipes_path(category_id: category.id), class: "text-decoration-none text-dark rounded p-2" %></td></tr>
+  <% end %>
+</table>
+
 <%= link_to "新規投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
 <% @post_recipes.each do |post_recipe| %>
   <div class="m-5">
     <%= link_to post_recipe_path(post_recipe) do %>
     <div><%= image_tag post_recipe.get_image(300, 300) %></div>
+    <div><%= post_recipe.title %></div>
     <% end %>
     <div><%= post_recipe.user.name %></div>
   </div>
