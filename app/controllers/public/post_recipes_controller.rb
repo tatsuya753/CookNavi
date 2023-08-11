@@ -1,7 +1,16 @@
 class Public::PostRecipesController < ApplicationController
 
   def index
-    @post_recipes = PostRecipe.all
+    @categories = Category.all
+    if
+      params[:category_id].present?
+      @post_recipes = PostRecipe.where("category_id LIKE?","%#{params[:category_id]}%")
+    elsif
+      params[:word].present?
+      @post_recipes = PostRecipe.where('title LIKE ?', "%#{params[:word]}%")
+    else
+      @post_recipes = PostRecipe.all
+    end
   end
 
   def show
