@@ -1,6 +1,7 @@
 class Public::PostRecipesController < ApplicationController
 
   def index
+    @recipe_comment = RecipeComment.all
     @categories = Category.all
     if
       params[:category_id].present?
@@ -15,6 +16,7 @@ class Public::PostRecipesController < ApplicationController
 
   def show
     @post_recipe = PostRecipe.find(params[:id])
+    @recipe_comment = RecipeComment.new
   end
 
   def new

@@ -27,3 +27,25 @@
     <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
     <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white', "data-confirm" => "本当に削除しますか？" %>
   </div>
+
+  <div class="ml-5">
+    <div>
+      <p>コメント件数：<%= @post_recipe.recipe_comments.count %></p>
+      <% @post_recipe.recipe_comments.each do |recipe_comment| %>
+        <p><%= image_tag recipe_comment.user.get_profile_image(100, 100) %></p>
+          <%= recipe_comment.user.name %><br>
+            <%= recipe_comment.comment %><br>
+              <%= recipe_comment.created_at.strftime('%Y/%m/%d') %>
+
+            <% if recipe_comment.user == current_user %>
+              <%= link_to "削除", post_recipe_recipe_comment_path(recipe_comment.post_recipe, recipe_comment), method: :delete, class: 'btn btn-md btn-danger text-white' %>
+            <% end %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with model: [@post_recipe, @recipe_comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+      <% end %>
+    </div>
+  </div>
