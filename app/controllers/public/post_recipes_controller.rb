@@ -1,4 +1,5 @@
 class Public::PostRecipesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @recipe_comment = RecipeComment.all
@@ -28,8 +29,21 @@ class Public::PostRecipesController < ApplicationController
   def create
     @post_recipe = PostRecipe.new(post_recipe_params)
     @post_recipe.user_id = current_user.id
-    @post_recipe.save
-    redirect_to post_recipe_path(@post_recipe.id)
+    # 投稿ボタンを押下した場合
+    if params[:post]
+      if @post_recipe.save(context: :publicize)
+        redirect_to post_recipe_path(@post_recipe), notice: "レシピを投稿しました！"
+      else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    # 下書きボタンを押下した場合
+    else
+      if @post_recipe.update(post_status: true)
+        redirect_to user_path(current_user), notice: "レシピを下書き保存しました！"
+      else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    end
   end
 
   def edit
@@ -37,9 +51,36 @@ class Public::PostRecipesController < ApplicationController
   end
 
   def update
-    post_recipe = PostRecipe.find(params[:id])
-    post_recipe.update(post_recipe_params)
-    redirect_to post_recipe_path
+    @post_recipe = PostRecipe.find(params[:id])
+    # 下書きレシピの更新（公開）の場合
+    if params[:publicize_draft]
+      # レシピ公開時にバリデーションを実施
+      # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
+      @post_recipe.attributes = post_recipe_params.merge(post_status: false)
+      if @post_recipe.save(context: :publicize)
+        redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
+      else
+        @post_recipe.post_status = true
+        render :edit, alert: "レシピを公開できませんでした。入力内容をご確認のうえ再度お試しください"
+      end
+
+    # 公開済みレシピの更新の場合
+    elsif params[:update_post]
+      @post_recipe.attributes = post_recipe_params
+      if @post_recipe.save(context: :publicize)
+        redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを更新しました！"
+      else
+        render :edit, alert: "レシピを更新できませんでした。入力内容をご確認のうえ再度お試しください"
+      end
+
+    # 下書きレシピの更新（非公開）の場合
+    else
+      if @post_recipe.update(post_recipe_params)
+        redirect_to post_recipe_path(@post_recipe.id), notice: "下書きレシピを更新しました！"
+      else
+        render :edit, alert: "更新できませんでした。入力内容をご確認のうえ再度お試しください"
+      end
+    end
   end
 
   def destroy

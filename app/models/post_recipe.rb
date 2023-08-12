@@ -12,6 +12,16 @@ class PostRecipe < ApplicationRecord
   # 関連付けしたモデルを一緒にデータ保存できるようにする
   accepts_nested_attributes_for :procedures, allow_destroy: true
   accepts_nested_attributes_for :ingredients, allow_destroy: true
+  
+  # 投稿バリデーション
+  with_options presence: true, on: :publicize do
+    validates :image
+    validates :serving
+    validates :title
+    validates :introduction
+  end
+  validates :title, length: { maximum: 14 }, on: :publicize
+  validates :introduction, length: { maximum: 80 }, on: :publicize
 
   def get_image(width, height)
       image
