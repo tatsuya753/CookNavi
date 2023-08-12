@@ -1,4 +1,5 @@
 class Public::PostRecipesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @recipe_comment = RecipeComment.all
