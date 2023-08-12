@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "homes#top"
     resources :users
-    resources :post_recipes
+    resources :post_recipes do
+      resources :recipe_comments, only: [:destroy]
+    end
     resources :categories
   end
 
