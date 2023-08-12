@@ -16,19 +16,12 @@
       <div><%= ingredient.name %></div>
       <div><%= ingredient.amount %></div>
     <% end %>
+  </div>
 
       <h3>作り方</h3>
     <% @post_recipe.procedures.each do |procedure| %>
       <div><%= procedure.body %></div>
     <% end %>
-
-    <%= render 'keeps', post_recipe: @post_recipe %>
-
-    <% if @post_recipe.user == current_user %>
-    <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
-    <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white', "data-confirm" => "本当に削除しますか？" %>
-    <% end %>
-  </div>
 
   <div class="ml-5">
     <div>
@@ -39,15 +32,7 @@
             <%= recipe_comment.comment %><br>
               <%= recipe_comment.created_at.strftime('%Y/%m/%d') %>
 
-            <% if recipe_comment.user == current_user %>
-              <%= link_to "削除", post_recipe_recipe_comment_path(recipe_comment.post_recipe, recipe_comment), method: :delete, class: 'btn btn-md btn-danger text-white' %>
-            <% end %>
-      <% end %>
-    </div>
-    <div>
-      <%= form_with model: [@post_recipe, @recipe_comment] do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
+              <%= link_to "削除", admin_post_recipe_recipe_comment_path(recipe_comment.post_recipe, recipe_comment), method: :delete, class: 'btn btn-md btn-danger text-white' %>
       <% end %>
     </div>
   </div>

@@ -1,14 +1,21 @@
 class Admin::PostRecipesController < ApplicationController
 
-  def destroy
-    RecipeComment.find(params[:id]).destroy
-    redirect_to admin_post_recipe_path(params[:post_recipe_id])
+  def index
+    @recipe_comment = RecipeComment.all
+    @categories = Category.all
+    if
+      params[:category_id].present?
+      @post_recipes = PostRecipe.where("category_id LIKE?","%#{params[:category_id]}%")
+    elsif
+      params[:word].present?
+      @post_recipes = PostRecipe.where('title LIKE ?', "%#{params[:word]}%")
+    else
+      @post_recipes = PostRecipe.all
+    end
   end
 
-  private
-
-  def recipe_comment_params
-    params.require(:recipe_comment).permit(:comment)
+  def show
+    @post_recipe = PostRecipe.find(params[:id])
+    @recipe_comment = RecipeComment.all
   end
-
 end
