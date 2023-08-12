@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h3 class="my-5 text-center"><%= @user.name %>さんの会員詳細</h3>
+      <%= form_with model: @user, url: admin_user_path do |f| %>
+        <table class="table">
+          <tr>
+            <th class="text-left">会員ID</th>
+            <td><%= @user.id %></td>
+          </tr>
+
+          <tr>
+            <th class="text-left">氏名</th>
+            <td><%= @user.name %></td>
+          </tr>
+
+          <tr>
+            <th class="text-left">メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+
+          <tr>
+           <th class="text-left">会員ステータス</th>
+              <% if @user.is_deleted == true %>
+            <td class="text-danger">退会済み</td>
+              <% else %>
+            <td class="text-success">有効</td>
+              <% end %>
+          </tr>
+
+        </table>
+          <div class="form-group">
+            <%= f.label :"会員ステータス", class:"col-4" %>
+            <%= f.radio_button :is_deleted, false %>
+            <%= f.label :is_deleted, "有効" %>
+            <%= f.radio_button :is_deleted, true %>
+            <%= f.label :is_deleted, "退会" %>
+          </div>
+        <div class="form-group col-11 d-flex justify-content-around">
+          <%= f.submit '変更を保存', class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
