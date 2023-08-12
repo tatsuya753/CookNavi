@@ -40,10 +40,18 @@
           <% end %>
         </div>
 
-      <div class="row mt-4 pb-5">
-        <div class="form-inline mx-auto">
-          <%= f.submit 'レシピを更新' %>
-        </div>
+      <div class="row mt-4">
+      <div class="form-inline mx-auto">
+        <% if @post_recipe.post_status == true %>
+          <%= f.submit "レシピを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
+          <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+        <% else %>
+          <%= f.submit "レシピを更新", :name => 'update_post', class:'btn btn-sm btn-warning text-light' %>
+        <% end %>
       </div>
+    </div>
+    <div class="mt-4 pb-3 text-center">
+      <u><%= link_to "レシピを削除", post_recipe_path, method: :delete, data: {confirm: "このレシピを削除しますか？"}, class:'btn btn-sm btn-danger text-light' %></u>
+    </div>
   </div>
 <% end %>
