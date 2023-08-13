@@ -18,6 +18,7 @@ class Public::PostRecipesController < ApplicationController
   def show
     @post_recipe = PostRecipe.find(params[:id])
     @recipe_comment = RecipeComment.new
+    @user = @post_recipe.user
   end
 
   def new
