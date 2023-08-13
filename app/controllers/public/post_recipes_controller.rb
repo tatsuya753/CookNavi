@@ -1,5 +1,5 @@
 class Public::PostRecipesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @recipe_comment = RecipeComment.all
@@ -18,6 +18,7 @@ class Public::PostRecipesController < ApplicationController
   def show
     @post_recipe = PostRecipe.find(params[:id])
     @recipe_comment = RecipeComment.new
+    @user = @post_recipe.user
   end
 
   def new

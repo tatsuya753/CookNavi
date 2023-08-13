@@ -1,7 +1,9 @@
 投稿詳細
   <div class="m-5">
     <div><%= image_tag @post_recipe.get_image(300, 300) %></div>
+    <%= link_to user_path(@user) do %>
     <div>by<%= @post_recipe.user.name %></div>
+    <% end %>
     <h3>カテゴリ</h3>
     <div><%= @post_recipe.category.name %></div>
     <h3>料理名</h3>
