@@ -31,7 +31,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    get "search" => "post_res#search"
       resources :users do
         collection do
           # 退会確認画面
