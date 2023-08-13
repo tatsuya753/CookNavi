@@ -24,11 +24,12 @@
 
       <div class="row">
           <%= f.fields_for :ingredients do |ingredient| %>
-            <h6>材料・調味料</h6>
-              <%= ingredient.text_area :name, placeholder: "例）にんじん" %>
-            <h6>分量</h6>
-              <%= ingredient.text_area :amount, placeholder: "例）一本" %>
+            <%= render 'ingredients_fields', ingredient: ingredient %>
           <% end %>
+
+          <div class='links'>
+            <%#= link_to_add_association '材料追加', f, :ingredients %>
+          </div>
       </div>
 
     <!--作り方登録欄-->

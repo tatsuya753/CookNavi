@@ -11,7 +11,11 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application"; 
+import "../stylesheets/application";
+import "cocoon";
+
+// require("jquery")
+// require("@nathanvda/cocoon")
 
 Rails.start()
 Turbolinks.start()
