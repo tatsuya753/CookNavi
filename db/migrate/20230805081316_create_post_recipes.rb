@@ -7,6 +7,7 @@ class CreatePostRecipes < ActiveRecord::Migration[6.1]
       t.string :title
       t.text :introduction
       t.integer :serving
+      # 下書き保存＝true　投稿＝false
       t.boolean :post_status, default: false
 
       t.timestamps
