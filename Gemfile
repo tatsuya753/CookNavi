@@ -59,3 +59,5 @@ gem 'devise'
 # devise日本語化
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+# フォーム欄の動的な追加
+gem "cocoon"

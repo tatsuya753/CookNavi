@@ -1,0 +1,12 @@
+<div class="nested-fields">
+  <div>
+  <h6>材料・調味料</h6>
+    <%= ingredient.text_area :name, placeholder: "例）にんじん" %>
+  <h6>分量</h6>
+    <%= ingredient.text_area :amount, placeholder: "例）一本" %>
+
+    <div>
+     <%= link_to_remove_association "削除", ingredient, class: 'mr-5 btn btn-sm btn-danger text-white' %>
+    </div>
+  </div>
+</div>

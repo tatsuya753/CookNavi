@@ -1,0 +1,15 @@
+<div class="container">
+   <div class="row">
+    <div class="col-10 mx-auto">
+        <h3 class="ml-5 my-5">カテゴリ編集</h3>
+        <div class="form-group">
+            <%= form_with model: @category,url: admin_category_path do |f| %>
+              <%= f.label "カテゴリ名" %>
+              <%= f.text_field :name, id:"inputname" %>
+            <%=f.submit "変更を保存", class:"btn btn-success my-3 mr-3" %>
+            </div>
+            <% end %>
+        </div>
+    </div>
+  </div>
+</div>

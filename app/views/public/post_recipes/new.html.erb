@@ -1,6 +1,6 @@
 
 <h1>新規投稿</h1>
-<%= form_with model: @post_recipe, local:true do |f| %>
+<%= form_with model: @post_recipe do |f| %>
 <div class="m-5">
   <h4>画像</h4>
   <%= f.file_field :image, accept: "image/*" %>
@@ -22,23 +22,48 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row", id="ingredients_form">
           <%= f.fields_for :ingredients do |ingredient| %>
-            <h6>材料・調味料</h6>
-              <%= ingredient.text_area :name, placeholder: "例）にんじん" %>
-            <h6>分量</h6>
-              <%= ingredient.text_area :amount, placeholder: "例）一本" %>
+            <%= render 'ingredients_fields', ingredient: ingredient %>
           <% end %>
+
+          <div class="links">
+<%= link_to_add_association '材料の追加', f , :ingredients, partial: "ingredients_fields",
+            # オプション
+            data: {
+              # フォームを追加する場所の指定
+              association_insertion_node: '#ingredients_form',
+              # フォームを前後どの位置に追加するか。(初期値: before)
+              association_insertion_method: 'before'
+            },
+            # フォームオブジェクトを指定する場合(初期値 : f)
+            form_name: 'ingredient'
+              %>
+          </div>
       </div>
 
     <!--作り方登録欄-->
         <h4>つくり方</h4>
 
-      <div class="row">
+      <div class="row", id="procedures_form">
         <%= f.fields_for :procedures do |procedure| %>
-          <%= procedure.text_field :body, placeholder:"手順を記入" %>
+          <%= render 'procedures_fields', procedure: procedure %>
         <% end %>
       </div>
+
+      <div class="links">
+        <%= link_to_add_association '作り方の追加', f , :procedures, partial: "procedures_fields",
+            # オプション
+            data: {
+              # フォームを追加する場所の指定
+              association_insertion_node: '#procedures_form',
+              # フォームを前後どの位置に追加するか。(初期値: before)
+              association_insertion_method: 'before'
+            },
+            # フォームオブジェクトを指定する場合(初期値 : f)
+            form_name: 'procedure'
+              %>
+          </div>
 
     <div class="row mt-4 pb-5">
     <div class="form-inline mx-auto">
