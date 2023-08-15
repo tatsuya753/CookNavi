@@ -1,17 +1,89 @@
-マイページ
+<div class="container">
+  <div class="row">
+    <div class="col-10 text-center">
+      <h1 class="my-5">マイページ</h1>
+       <%= image_tag @user.get_profile_image(300, 300)%>
+         <h3 class="my-5"><%= @user.name %></h3>
 
-<div class="m-5">
-  <%= image_tag @user.get_profile_image(300, 300) %>
-  <h3><%= @user.name %></h3>
+        <% if @user == current_user %>
+          <%= link_to "プロフィール編集", edit_user_path(current_user), class: 'btn btn-md btn-success text-white' %>
+          <%= link_to "レシピ投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
+        <% end %>
+    </div>
+
+    <div class="col-10 mt-5">
+
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item col-4 tab tab-active">
+          保存済み一覧
+        </li>
+        <li class="list-group-item col-4 tab">
+          投稿レシピ一覧
+        </li>
+        <li class="list-group-item col-4 tab">
+          下書き一覧
+        </li>
+      </ul>
+
+<!--タブ、保存したレシピ-->
+  <div class="tabbox-contents">
+    <div class="tabbox box-show">
+      <% if @kept_posts.empty? %>
+            <h6 class='mt-4'>保存したレシピはまだありません。</h6>
+          <% else %>
+            <div class="d-flex flex-wrap">
+              <% @kept_posts.each do |kept_post| %>
+                <div style='width: 210px' class="card text-center mt-3 pt-3 px-2 ml-5">
+                  <%= image_tag kept_post.get_image(300, 300) %>
+                  <%= link_to kept_post.title, post_recipe_path(kept_post), class:'card-text text-wrap font-weight-bold pt-2' %>
+                  <p class="mb-1 pt-1">by<%= link_to kept_post.user.name, user_path(kept_post.user), class:'card-text text-wrap ml-2' %></p>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+
+    <!--タブ、会員本人が投稿したレシピ-->
+    <div class="tabbox">
+     <% if @user_posts.empty? %>
+            <h6 class='mt-4'>投稿レシピはまだありません。</h6>
+          <% else %>
+            <div class="d-flex flex-wrap">
+              <% @user_posts.each do |user_post| %>
+                <div style='width: 210px' class="card text-center mt-3 py-3 px-2 ml-5">
+                  <%= image_tag user_post.get_image(300, 300) %>
+                  <%= link_to user_post.title, post_recipe_path(user_post), class:'card-text font-weight-bold text-wrap py-2' %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+    </div>
+
+    <!--タブ、下書き保存したレシピ-->
+    <div class="tabbox">
+      <% if @draft_posts.empty? %>
+            <h6>下書き中のレシピはまだありません。</h6>
+          <% else %>
+            <table style='width: 90%' class="table ml-2">
+            <% @draft_posts.each do |draft_post| %>
+              <tr class="border-bttom align-middle">
+                <td class="p-2 text-center">
+                    <%= image_tag draft_post.get_image(100, 100) %>
+                </td>
+                <td class="p-2 align-middle ml-3">
+                  <%= draft_post.title %>
+                </td>
+                <td class="p-2 align-middle">
+                  <%= link_to "編集する", edit_post_recipe_path(draft_post), class:'btn btn-sm btn-outline-warning py-0' %>
+                </td>
+              </tr>
+            <% end %>
+            </table>
+          <% end %>
+    </div>
+  </div>
+  </div>
+
+  </div>
 </div>
-
-<% if @user == current_user %>
-  <%= link_to "プロフィール編集", edit_user_path(current_user), class: 'btn btn-md btn-success text-white' %>
-  <%= link_to "レシピ投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
-<% end %>
-<!--ゲストユーザーは非表示-->
-<%# unless user.guest_user? %>
-<!--<div class="row">-->
-  <%#= link_to "プロフィール編集",edit_user_path %>
-<!--</div>-->
-<%# end %>

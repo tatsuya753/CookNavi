@@ -27,8 +27,11 @@ class PostRecipe < ApplicationRecord
   validates :introduction, length: { maximum: 80 }, on: :publicize
 
   def get_image(width, height)
-      image
-      image.variant(resize_to_limit: [width, height]).processed
+    unless image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    image.variant(resize_to_limit: [width, height]).processed
   end
 
   def kept_by?(user)
