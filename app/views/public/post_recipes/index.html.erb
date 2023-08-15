@@ -19,7 +19,9 @@
       <div><%= post_recipe.user.name %></div>
     </div>
 
+    <% unless @user == current_user %>
     <%= render 'keeps', post_recipe: post_recipe %>
+    <% end %>
 
     <%= link_to post_recipe_path(post_recipe) do %>
     <p>コメント件数：<%= post_recipe.recipe_comments.count %></p>
