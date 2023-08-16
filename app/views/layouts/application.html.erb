@@ -13,18 +13,15 @@
   <body>
   <header>
     <nav class="navbar navbar-expand-lg border-bottom", style="background-color:#F39800;">
-      <div style="background-color:#F39800;">
+      <div class="col-lg-2", style="background-color:#F39800;">
         <h2 style="background-color:#F39800;"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
       </div>
 
-      <div class="d-flex justify-content-end", style="background-color:#F39800;">
+      <div class="col-lg-4 d-flex justify-content-center", style="background-color:#F39800;">
         <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
           <div class="input-group">
-            <%= f.text_field :word, value: @word, class: "form-control", placeholder: "キーワードを入力" %>
-              <span class="input-group-btn input-group-append">
-                  <%= button_tag type: "submit", class: "btn btn-secondary search-btn" do %>
-                    <i class="fas fa-search"></i> 検索</submit>
-                  <% end %>
+            <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
+              <%= f.submit "検索", class: "btn text-white form-control", style: "background-color: #F39800" %>
         <% end %>
               </span>
            </div>
@@ -86,8 +83,9 @@
   </main>
 
   <footer>
-    <div class="container">
-      <p class="text-center">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
+    <div style="background-color:#F39800;">
+      <h4 class="logo text-center", style="background-color:#F39800;"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
+      <p class="text-center", style="background-color:#F39800;">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
     </div>
   </footer>
 
