@@ -12,16 +12,16 @@
 
   <body>
   <header>
-    <nav class="navbar navbar-expand-lg border-bottom", style="background-color:#F39800;">
-      <div class="col-lg-2", style="background-color:#F39800;">
-        <h2 style="background-color:#F39800;"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+    <nav class="navbar navbar-expand-lg border-bottom", style="background-color:#FFC093;">
+      <div class="col-lg-2", style="background-color:#FFC093;">
+        <h2 style="background-color:#FFC093;"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
       </div>
 
-      <div class="col-lg-4 d-flex justify-content-center", style="background-color:#F39800;">
+      <div class="col-lg-4 d-flex justify-content-center", style="background-color:#FFC093;">
         <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
           <div class="input-group">
             <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
-              <%= f.submit "検索", class: "btn text-white form-control", style: "background-color: #F39800" %>
+              <%= f.submit "検索", class: "btn text-white form-control", style: "background-color: #FFC093" %>
         <% end %>
               </span>
            </div>
@@ -30,47 +30,47 @@
         <ul class="navbar-nav ml-auto">
       <!-- 管理者がログインしている場合-->
         <% if admin_signed_in? %>
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "会員一覧", admin_root_path, class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "投稿一覧", admin_post_recipes_path, class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "カテゴリ一覧", admin_categories_path, class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-light mx-5" %>
           </li>
 
       <!--ユーザー（会員）がログインしている場合 -->
         <% elsif user_signed_in? %>
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "投稿一覧", post_recipes_path, class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "マイページ", user_path(current_user), class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-light mx-5" %>
           </li>
 
       <!-- ログインしていない場合 -->
         <% else %>
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "投稿一覧", post_recipes_path, class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "新規登録", new_user_registration_path, class: "text-light mx-5" %>
           </li>
 
-          <li style="background-color:#F39800;">
+          <li style="background-color:#FFC093;">
             <%= link_to "ログイン", new_user_session_path ,class: "text-light mx-5" %>
           </li>
         <% end %>
@@ -83,9 +83,9 @@
   </main>
 
   <footer>
-    <div style="background-color:#F39800;">
-      <h4 class="logo text-center", style="background-color:#F39800;"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
-      <p class="text-center", style="background-color:#F39800;">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
+    <div style="background-color:#FFC093;">
+      <h4 class="logo text-center pt-5", style="background-color:#FFC093;"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
+      <p class="text-center", style="background-color:#FFC093;">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
     </div>
   </footer>
 

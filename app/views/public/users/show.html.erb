@@ -32,8 +32,8 @@
           <% else %>
             <div class="d-flex flex-wrap">
               <% @kept_posts.each do |kept_post| %>
-                <div style='width: 210px' class="card text-center mt-3 pt-3 px-2 ml-5">
-                  <%= image_tag kept_post.get_image(300, 300) %>
+                <div style='width: 200px' class="card text-center mt-3 pt-3 px-2 ml-5">
+                  <%= image_tag kept_post.get_image(200, 200) %>
                   <%= link_to kept_post.title, post_recipe_path(kept_post), class:'card-text text-wrap font-weight-bold pt-2' %>
                   <p class="mb-1 pt-1">by<%= link_to kept_post.user.name, user_path(kept_post.user), class:'card-text text-wrap ml-2' %></p>
                 </div>
@@ -50,8 +50,8 @@
           <% else %>
             <div class="d-flex flex-wrap">
               <% @user_posts.each do |user_post| %>
-                <div style='width: 210px' class="card text-center mt-3 py-3 px-2 ml-5">
-                  <%= image_tag user_post.get_image(300, 300) %>
+                <div style='width: 200px' class="card text-center mt-3 py-3 px-2 ml-5">
+                  <%= image_tag user_post.get_image(200, 200) %>
                   <%= link_to user_post.title, post_recipe_path(user_post), class:'card-text font-weight-bold text-wrap py-2' %>
                 </div>
               <% end %>
@@ -103,8 +103,8 @@
             <% else %>
               <div class="d-flex flex-wrap">
                 <% @kept_posts.each do |kept_post| %>
-                  <div style='width: 210px' class="card text-center mt-3 pt-3 px-2 ml-5">
-                    <%= image_tag kept_post.get_image(300, 300) %>
+                  <div style='width: 200px' class="card text-center mt-3 pt-3 px-2 ml-5">
+                    <%= image_tag kept_post.get_image(200, 200) %>
                     <%= link_to kept_post.title, post_recipe_path(kept_post), class:'card-text text-wrap font-weight-bold pt-2' %>
                     <p class="mb-1 pt-1">by<%= link_to kept_post.user.name, user_path(kept_post.user), class:'card-text text-wrap ml-2' %></p>
                   </div>
@@ -121,8 +121,8 @@
             <% else %>
               <div class="d-flex flex-wrap">
                 <% @user_posts.each do |user_post| %>
-                  <div style='width: 210px' class="card text-center mt-3 py-3 px-2 ml-5">
-                    <%= image_tag user_post.get_image(300, 300) %>
+                  <div style='width: 200px' class="card text-center mt-3 py-3 px-2 ml-5">
+                    <%= image_tag user_post.get_image(200, 200) %>
                     <%= link_to user_post.title, post_recipe_path(user_post), class:'card-text font-weight-bold text-wrap py-2' %>
                   </div>
                 <% end %>
