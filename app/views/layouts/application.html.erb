@@ -6,23 +6,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
   <header>
     <nav class="navbar navbar-expand-lg border-bottom">
-      <div><h2 class="logo"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2></div>
+      <div class="col-lg-2">
+        <h2><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+      </div>
 
-      <div class="d-flex justify-content-end">
-        <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
+      <div class="col-lg-4 d-flex justify-content-center">
+        <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
           <div class="input-group">
-            <%= f.text_field :word, value: @word, class: "form-control search-control", placeholder: "キーワードを入力" %>
-              <span class="input-group-btn input-group-append">
-                  <%= button_tag type: "submit", class: "btn btn-secondary search-btn" do %>
-                    <i class="fas fa-search"></i> 検索</submit>
-                  <% end %>
+            <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
+              <%= f.submit "検索", class: "btn text-white form-control"%>
         <% end %>
               </span>
            </div>
@@ -32,47 +31,47 @@
       <!-- 管理者がログインしている場合-->
         <% if admin_signed_in? %>
           <li>
-            <%= link_to "会員一覧", admin_root_path, class: "text-dark ml-5" %>
+            <%= link_to "会員一覧", admin_root_path, class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "投稿一覧", admin_post_recipes_path, class: "text-dark ml-5" %>
+            <%= link_to "投稿一覧", admin_post_recipes_path, class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "カテゴリ一覧", admin_categories_path, class: "text-dark ml-5" %>
+            <%= link_to "カテゴリ一覧", admin_categories_path, class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-dark ml-5 mr-5" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-light mx-5" %>
           </li>
 
       <!--ユーザー（会員）がログインしている場合 -->
         <% elsif user_signed_in? %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path, class: "text-dark ml-5" %>
+            <%= link_to "投稿一覧", post_recipes_path, class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "マイページ", user_path(current_user), class: "text-dark ml-5" %>
+            <%= link_to "マイページ", user_path(current_user), class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-dark ml-5 mr-5" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-light mx-5" %>
           </li>
 
       <!-- ログインしていない場合 -->
         <% else %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path, class: "text-dark ml-5" %>
+            <%= link_to "投稿一覧", post_recipes_path, class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "新規登録", new_user_registration_path, class: "text-dark ml-5" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "text-light mx-5" %>
           </li>
 
           <li>
-            <%= link_to "ログイン", new_user_session_path ,class: "text-dark ml-5 mr-5" %>
+            <%= link_to "ログイン", new_user_session_path ,class: "text-light mx-5" %>
           </li>
         <% end %>
       </ul>
@@ -83,11 +82,11 @@
     <%= yield %>
   </main>
 
-  <footer>
-    <div class="container">
-      <p class="text-center">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
-    </div>
-  </footer>
-
+    <footer>
+      <div>
+        <h4 class="logo text-center pt-5"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
+        <p class="text-center">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
+      </div>
+    </footer>
   </body>
 </html>
