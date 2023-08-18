@@ -5,7 +5,7 @@
        <%= image_tag @user.get_profile_image(300, 300)%>
          <h3 class="my-5"><%= @user.name %></h3>
 
-      <!--ログインユーザーの場合-->
+      <!--ログインユーザー自身の場合-->
         <% if @user == current_user %>
           <%= link_to "プロフィール編集", edit_user_path(current_user), class: 'btn btn-md btn-success text-white' %>
           <%= link_to "レシピ投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
@@ -32,8 +32,10 @@
           <% else %>
             <div class="d-flex flex-wrap">
               <% @kept_posts.each do |kept_post| %>
-                <div style='width: 200px' class="card text-center mt-3 pt-3 px-2 ml-5">
-                  <%= image_tag kept_post.get_image(200, 200) %>
+                <div class="card text-center mt-3 pt-3 px-2 ml-5">
+                  <div class:"card-img-top" style="height:200px;">
+                   <%= image_tag kept_post.get_image(200, 200) %>
+                  </div>
                   <%= link_to kept_post.title, post_recipe_path(kept_post), class:'card-text text-wrap font-weight-bold pt-2' %>
                   <p class="mb-1 pt-1">by<%= link_to kept_post.user.name, user_path(kept_post.user), class:'card-text text-wrap ml-2' %></p>
                 </div>
@@ -50,8 +52,10 @@
           <% else %>
             <div class="d-flex flex-wrap">
               <% @user_posts.each do |user_post| %>
-                <div style='width: 200px' class="card text-center mt-3 py-3 px-2 ml-5">
-                  <%= image_tag user_post.get_image(200, 200) %>
+                <div class="card text-center mt-3 py-3 px-2 ml-5">
+                  <div class:"card-img-top" style="height:200px;">
+                    <%= image_tag user_post.get_image(200, 200) %>
+                  </div>
                   <%= link_to user_post.title, post_recipe_path(user_post), class:'card-text font-weight-bold text-wrap py-2' %>
                 </div>
               <% end %>
@@ -83,7 +87,7 @@
     </div>
   </div>
 
-  <!--ログインユーザーじゃない場合-->
+  <!--ログインユーザー自身じゃない場合-->
   <% else %>
     <div class="col-12 mt-5">
         <ul class="list-group list-group-horizontal">
@@ -103,8 +107,10 @@
             <% else %>
               <div class="d-flex flex-wrap">
                 <% @kept_posts.each do |kept_post| %>
-                  <div style='width: 200px' class="card text-center mt-3 pt-3 px-2 ml-5">
-                    <%= image_tag kept_post.get_image(200, 200) %>
+                  <div class="card text-center mt-3 pt-3 px-2 ml-5">
+                    <div class:"card-img-top" style="height:200px;">
+                    　<%= image_tag kept_post.get_image(200, 200) %>
+                    </div>
                     <%= link_to kept_post.title, post_recipe_path(kept_post), class:'card-text text-wrap font-weight-bold pt-2' %>
                     <p class="mb-1 pt-1">by<%= link_to kept_post.user.name, user_path(kept_post.user), class:'card-text text-wrap ml-2' %></p>
                   </div>
@@ -114,15 +120,17 @@
           </div>
       </div>
 
-      <!--タブ、会員本人が投稿したレシピ-->
+      <!--タブ、会員が投稿したレシピ-->
       <div class="tabbox">
        <% if @user_posts.empty? %>
               <h6 class='mt-4'>投稿レシピはまだありません。</h6>
             <% else %>
               <div class="d-flex flex-wrap">
                 <% @user_posts.each do |user_post| %>
-                  <div style='width: 200px' class="card text-center mt-3 py-3 px-2 ml-5">
-                    <%= image_tag user_post.get_image(200, 200) %>
+                  <div class="card text-center mt-3 py-3 px-2 ml-5">
+                    <div class:"card-img-top" style="height:200px;">
+                      <%= image_tag user_post.get_image(200, 200) %>
+                    </div>
                     <%= link_to user_post.title, post_recipe_path(user_post), class:'card-text font-weight-bold text-wrap py-2' %>
                   </div>
                 <% end %>
