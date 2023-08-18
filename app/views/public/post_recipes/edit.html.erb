@@ -1,57 +1,66 @@
-編集画面
-
+<div><%= notice %><%= alert %></div>
 <%= form_with model: @post_recipe do |f| %>
-  <div class="m-5">
-    <h4>画像</h4>
-    <%= f.file_field :image, accept: "image/*" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center my-5"><h1>レシピ編集</h1></div>
 
-    <h4>カテゴリ</h4>
-    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
 
-    <h4>料理名</h4>
-    <%= f.text_area :title %>
-
-    <h4>料理紹介</h4>
-    <%= f.text_area :introduction %>
-
-    　<!--材料登録欄-->
-      <div class="row">
-        <div class="form-inline mb-2">
-          <h4 class="mb-0">材料</h4>
-          <%= f.select :serving, *[1..10], include_blank: "何人分"%>
-        </div>
+      <div class="col-12 text-center mb-4">
+        <h4>画像</h4>
+        <%= f.file_field :image, accept: "image/*" %>
       </div>
 
-      <div class="row", id="ingredients_form">
-          <%= f.fields_for :ingredients do |ingredient| %>
+      <div class="col-12 text-center mb-4">
+        <h4>カテゴリ</h4>
+        <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
+      </div>
+
+      <div class="col-12 text-center mb-4">
+        <h4>料理名</h4>
+        <%= f.text_area :title %>
+      </div>
+
+      <div class="col-12 text-center mb-4">
+        <h4>料理紹介</h4>
+        <%= f.text_area :introduction %>
+      </div>
+
+      <div class="col-12 text-center mb-4">
+        <h4>何人分</h4>
+        <%= f.select :serving, *[1..10], include_blank: "選択してください" %>
+      </div>
+  </div>
+</div>
+
+<!--材料登録欄-->
+<div class="container my-3">
+    <div class="row justify-content-center mt-3">
+      <h5 class="col-sm-2">材料</h5>
+      <h5 class="col-sm-2">分量</h5>
+        <%= link_to_add_association '材料の追加', f , :ingredients, partial: "ingredients_fields",
+          # オプション
+          data: {
+            # フォームを追加する場所の指定
+            association_insertion_node: '#ingredients_form',
+            # フォームを前後どの位置に追加するか。(初期値: before)
+            association_insertion_method: 'before'
+          },
+          # フォームオブジェクトを指定する場合(初期値 : f)
+          form_name: 'ingredient'
+            %>
+    </div>
+
+    <%= f.fields_for :ingredients do |ingredient| %>
+      <div class="row justify-content-center" id="ingredients_form">
             <%= render 'ingredients_fields', ingredient: ingredient %>
           <% end %>
-
-          <div class="links">
-<%= link_to_add_association '材料の追加', f , :ingredients, partial: "ingredients_fields",
-            # オプション
-            data: {
-              # フォームを追加する場所の指定
-              association_insertion_node: '#ingredients_form',
-              # フォームを前後どの位置に追加するか。(初期値: before)
-              association_insertion_method: 'before'
-            },
-            # フォームオブジェクトを指定する場合(初期値 : f)
-            form_name: 'ingredient'
-              %>
-          </div>
       </div>
+</div>
 
-    <!--作り方登録欄-->
-        <h4>つくり方</h4>
-
-      <div class="row", id="procedures_form">
-        <%= f.fields_for :procedures do |procedure| %>
-          <%= render 'procedures_fields', procedure: procedure %>
-        <% end %>
-      </div>
-
-      <div class="links">
+<!--作り方登録欄-->
+<div class="container my-3">
+  <div class="row justify-content-center">
+    <h5 class="col-sm-2">つくり方</h5>
         <%= link_to_add_association '作り方の追加', f , :procedures, partial: "procedures_fields",
             # オプション
             data: {
@@ -63,7 +72,15 @@
             # フォームオブジェクトを指定する場合(初期値 : f)
             form_name: 'procedure'
               %>
-          </div>
+  </div>
+
+    <%= f.fields_for :procedures do |procedure| %>
+    <div class="row justify-content-center", id="procedures_form">
+        <%= render 'procedures_fields', procedure: procedure %>
+      <% end %>
+    </div>
+</div>
+
 
       <div class="row mt-4">
       <div class="form-inline mx-auto">
