@@ -1,74 +1,120 @@
-
-<h1>新規投稿</h1>
+<div><%= notice %><%= alert %></div>
 <%= form_with model: @post_recipe do |f| %>
-<div class="m-5">
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center my-5"><h1>レシピ投稿</h1></div>
 
-  <h4>カテゴリ</h4>
-  <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
 
-  <h4>料理名</h4>
-  <%= f.text_area :title %>
-
-  <h4>料理紹介</h4>
-  <%= f.text_area :introduction %>
-
-  　<!--材料登録欄-->
-      <div class="row">
-        <div class="form-inline mb-2">
-          <h4 class="mb-0">材料</h4>
-          <%= f.select :serving, *[1..10], include_blank: "何人分"%>
-        </div>
+      <div class="col-12 text-center mb-4">
+        <h4>画像</h4>
+        <%= f.file_field :image, accept: "image/*" %>
       </div>
 
-      <div class="row", id="ingredients_form">
-          <%= f.fields_for :ingredients do |ingredient| %>
-            <%= render 'ingredients_fields', ingredient: ingredient %>
-          <% end %>
-
-          <div class="links">
-<%= link_to_add_association '材料の追加', f , :ingredients, partial: "ingredients_fields",
-            # オプション
-            data: {
-              # フォームを追加する場所の指定
-              association_insertion_node: '#ingredients_form',
-              # フォームを前後どの位置に追加するか。(初期値: before)
-              association_insertion_method: 'before'
-            },
-            # フォームオブジェクトを指定する場合(初期値 : f)
-            form_name: 'ingredient'
-              %>
-          </div>
+      <div class="col-12 text-center mb-4">
+        <h4>カテゴリ</h4>
+        <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
       </div>
 
-    <!--作り方登録欄-->
-        <h4>つくり方</h4>
-
-      <div class="row", id="procedures_form">
-        <%= f.fields_for :procedures do |procedure| %>
-          <%= render 'procedures_fields', procedure: procedure %>
-        <% end %>
+      <div class="col-12 text-center mb-4">
+        <h4>料理名</h4>
+        <%= f.text_area :title %>
       </div>
 
-      <div class="links">
-        <%= link_to_add_association '作り方の追加', f , :procedures, partial: "procedures_fields",
-            # オプション
-            data: {
-              # フォームを追加する場所の指定
-              association_insertion_node: '#procedures_form',
-              # フォームを前後どの位置に追加するか。(初期値: before)
-              association_insertion_method: 'before'
-            },
-            # フォームオブジェクトを指定する場合(初期値 : f)
-            form_name: 'procedure'
-              %>
-          </div>
+      <div class="col-12 text-center mb-4">
+        <h4>料理紹介</h4>
+        <%= f.text_area :introduction %>
+      </div>
 
-    <div class="row mt-4 pb-5">
-    <div class="form-inline mx-auto">
-      <%= f.submit 'レシピを公開', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
-      <%= f.submit '下書きに保存', :name => 'post_status', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
-    </div>
+      <div class="col-12 text-center mb-4">
+        <h4>何人分</h4>
+        <%= f.select :serving, *[1..10], include_blank: "選択してください" %>
+      </div>
+  </div>
 </div>
+
+<!-- 材料登録欄 -->
+<div class="container my-3">
+  <div class="row justify-content-center mt-3">
+    <h5 class="col-sm-2">材料</h5>
+    <h5 class="col-sm-2">分量</h5>
+  </div>
+  <div class="col-12 text-center">
+    <div id="ingredients_form">
+      <%= f.fields_for :ingredients do |ingredient| %>
+        <%= render 'ingredients_fields', ingredient: ingredient %>
+      <% end %>
+    </div>
+    <%= link_to_add_association '材料の追加', f, :ingredients, partial: "ingredients_fields",
+      data: {
+        association_insertion_node: '.add-ingredient-button',
+        association_insertion_method: 'before'
+      },
+      form_name: 'ingredient',
+      class: 'add-ingredient-button' # 追加
+    %>
+  </div>
+</div>
+<!--材料追加ボタンのJS-->
+<script>
+  $(document).on('turbolinks:load', function() {
+    var addButton = $('.add-ingredient-button');
+    var formWrapper = $('#ingredients_form');
+
+    // Cocoonの初期化
+    formWrapper.on('cocoon:after-insert', function(e, insertedItem) {
+      // 一回目のフォームを一番上に移動
+      if (insertedItem.index() === 0) {
+        formWrapper.prepend(insertedItem);
+      }
+    });
+  });
+</script>
+
+
+<!--作り方登録欄-->
+<div class="container my-3">
+  <div class="row justify-content-center mt-3">
+    <h5 class="col-sm-2">つくり方</h5>
+  </div>
+      <div class="col-12 text-center">
+        <div class="justify-content-center", id="procedures_form">
+          <%= f.fields_for :procedures do |procedure| %>
+            <% render 'procedures_fields', procedure: procedure %>
+          <% end %>
+        </div>
+
+        <%= link_to_add_association '作り方の追加', f, :procedures, partial: "procedures_fields",
+      data: {
+        association_insertion_node: '.add-procedure-button',
+        association_insertion_method: 'before'
+      },
+      form_name: 'procedure',
+      class: 'add-procedure-button' # 追加
+    %>
+  </div>
+</div>
+
+<!--作り方追加ボタンのJS-->
+<script>
+  $(document).on('turbolinks:load', function() {
+    var addButton = $('.add-procedure-button');
+    var formWrapper = $('#procedures_form');
+
+    // Cocoonの初期化
+    formWrapper.on('cocoon:after-insert', function(e, insertedItem) {
+      // 一回目のフォームを一番上に移動
+      if (insertedItem.index() === 0) {
+        formWrapper.prepend(insertedItem);
+      }
+    });
+  });
+</script>
+
+
+    <div class="row justify-content-center mt-4 pb-5">
+      <div class="form-inline mx-auto">
+        <%= f.submit 'レシピを公開', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
+        <%= f.submit '下書きに保存', :name => 'post_status', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
+      </div>
+    </div>
 <% end %>

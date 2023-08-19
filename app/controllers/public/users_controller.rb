@@ -1,5 +1,10 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :ensure_guest_user, only: [:edit]
+
+  def index
+    redirect_to new_user_registration_path
+  end
 
   def show
     @user = User.find(params[:id])

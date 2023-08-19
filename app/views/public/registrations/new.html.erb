@@ -1,7 +1,8 @@
 <div class="container text-center">
+  <%= form_with model: @user, url: user_registration_path do |f| %>
   <div class="text-center py-5">
     <h2>新規登録</h2>
-      <%= form_with model: @user, url: user_registration_path do |f| %>
+
         <%= render "public/shared/error_messages", resource: resource %>
   </div>
 

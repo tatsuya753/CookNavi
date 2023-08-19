@@ -50,6 +50,8 @@ class Public::PostRecipesController < ApplicationController
 
   def edit
     @post_recipe = PostRecipe.find(params[:id])
+    @post_recipe.ingredients.build
+    @post_recipe.procedures.build
   end
 
   def update
@@ -88,7 +90,7 @@ class Public::PostRecipesController < ApplicationController
   def destroy
     post_recipe = PostRecipe.find(params[:id])
     post_recipe.destroy
-    redirect_to post_recipes_path
+    redirect_to user_path(current_user)
   end
 
 private

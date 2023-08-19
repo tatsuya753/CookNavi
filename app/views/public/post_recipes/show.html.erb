@@ -1,55 +1,98 @@
-投稿詳細
-  <div class="m-5">
-    <div><%= image_tag @post_recipe.get_image(300, 300) %></div>
-    <%= link_to user_path(@user) do %>
-    <div>by<%= @post_recipe.user.name %></div>
-    <% end %>
-    <h3>カテゴリ</h3>
-    <div><%= @post_recipe.category.name %></div>
-    <h3>料理名</h3>
-    <div><%= @post_recipe.title %></div>
-    <h3>料理紹介</h3>
-    <div><%= @post_recipe.introduction %></div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6 text-center my-5"><h1>投稿詳細</h1></div>
 
-    <h4><%= @post_recipe.serving %>人前<h4>
+        <div class="col-12 text-center my-3"><%= image_tag @post_recipe.get_image(300, 300) %></div>
+        <%= link_to user_path(@user) do %>
+        <div class="col-2 text-center my-3">by<%= @post_recipe.user.name %></div>
+        <% end %>
 
-      <h3>材料・分量</h3>
-    <% @post_recipe.ingredients.each do |ingredient| %>
-      <div><%= ingredient.name %></div>
-      <div><%= ingredient.amount %></div>
-    <% end %>
+        <div class="col-lg-2 text-center my-3">
+        <%= render 'keeps', post_recipe: @post_recipe %>
+        </div>
 
-      <h3>作り方</h3>
-    <% @post_recipe.procedures.each do |procedure| %>
-      <div><%= procedure.body %></div>
-    <% end %>
+        <div class="col-12 text-center my-3">
+        <h4>カテゴリ</h4>
+        <div><%= @post_recipe.category.name %></div>
+        </div>
 
-    <%= render 'keeps', post_recipe: @post_recipe %>
+        <div class="col-12 text-center my-3">
+        <h4>料理名</h4>
+        <div><%= @post_recipe.title %></div>
+        </div>
 
-    <% if @post_recipe.user == current_user %>
-    <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
-    <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white', "data-confirm" => "本当に削除しますか？" %>
-    <% end %>
+        <div class="col-12 text-center my-3">
+        <h4>料理紹介</h4>
+        <div><%= @post_recipe.introduction %></div>
+        </div>
+
+        <div class="col-12 text-center my-3">
+        <h4><%= @post_recipe.serving %>人前</h4>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center my-3">
+          <table>
+            <thead>
+              <th class="col-3"><h4>材料</h4></th>
+              <th class="col-3"><h4>分量</h4></th>
+            </thead>
+            <tbody>
+              <% @post_recipe.ingredients.each do |ingredient| %>
+              <tr>
+                <td class="col-3 text-center"><%= ingredient.name %></td>
+                <td class="col-3 text-center"><%= ingredient.amount %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-12 text-center my-3">
+          <h3>作り方</h3>
+        <% @post_recipe.procedures.each do |procedure| %>
+          <div><%= procedure.body %></div>
+        <% end %>
+        </div>
+
+      <div class="col-12 text-center my-3">
+        <% if @post_recipe.user == current_user %>
+        <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
+        <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white ml-5', "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
+      </div>
   </div>
 
-  <div class="ml-5">
-    <div>
-      <p>コメント件数：<%= @post_recipe.recipe_comments.count %></p>
-      <% @post_recipe.recipe_comments.each do |recipe_comment| %>
-        <p><%= image_tag recipe_comment.user.get_profile_image(100, 100) %></p>
-          <%= recipe_comment.user.name %><br>
-            <%= recipe_comment.comment %><br>
-              <%= recipe_comment.created_at.strftime('%Y/%m/%d') %>
+  <div class="container">
+    <div class="row my-5">
+        <%= form_with model: [@post_recipe, @recipe_comment] do |f| %>
+          <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに", class: "col-12" %>
+          <%= f.submit "送信する" %>
+        <% end %>
 
+      <div class="text-right ml-5">
+        <p>コメント件数：<%= @post_recipe.recipe_comments.count %></p>
+      </div>
+
+
+      <div class="row overflow-auto" style="width:500px; height:100px;">
+        <% @post_recipe.recipe_comments.each do |recipe_comment| %>
+      <div class="col-2 text-center">
+          <p><%= image_tag recipe_comment.user.get_profile_image(80, 80) %></p>
+          <p><%= recipe_comment.user.name %></p>
+      </div>
+
+      <div class="col-7 d-flex align-items-center justify-content-center text-break">
+        <%= recipe_comment.created_at.strftime('%Y/%m/%d') %><br>
+        <%= recipe_comment.comment %>
+      </div>
+
+             <div class="col-3 text-center d-flex align-items-center">
             <% if recipe_comment.user == current_user %>
               <%= link_to "削除", post_recipe_recipe_comment_path(recipe_comment.post_recipe, recipe_comment), method: :delete, class: 'btn btn-md btn-danger text-white' %>
             <% end %>
+             </div>
       <% end %>
-    </div>
-    <div>
-      <%= form_with model: [@post_recipe, @recipe_comment] do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
-      <% end %>
+      </div>
     </div>
   </div>
+</div>
