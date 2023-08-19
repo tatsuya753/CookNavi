@@ -1,8 +1,22 @@
-新着投稿一覧
-
-<% @post_recipes.each do |post_recipe| %>
-  <div class="m-5">
-    <div><%= image_tag post_recipe.get_image(300, 300) %></div>
-    <div><%= post_recipe.user.name %></div>
+<div class="container text-center">
+  <h1 class="py-5">新着投稿一覧</h1>
+    <div class="row justify-content-center ">
+<div class="container my-3">
+        <div class="row">
+          <% @post_recipes.each do |post_recipe| %>
+            <div class="card-group col-lg-4">
+              <div class="card my-3">
+                  <%= link_to post_recipe_path(post_recipe) do %>
+                    <%= image_tag post_recipe.get_image(300, 300), class: "img-fluid" %>
+                  <% end %>
+                <div class="card-body">
+                  <div class="card-title"><%= link_to post_recipe.title, post_recipe_path(post_recipe), class: "text-dark" %></div>
+                  <div class="card-text"><%= post_recipe.user.name %></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
