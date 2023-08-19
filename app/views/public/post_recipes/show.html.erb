@@ -30,12 +30,21 @@
         <h4><%= @post_recipe.serving %>人前</h4>
         </div>
 
-        <div class="col-12 text-center my-3">
-          <h4>材料・分量</h4>
-        <% @post_recipe.ingredients.each do |ingredient| %>
-          <div><%= ingredient.name %></div>
-          <div><%= ingredient.amount %></div>
-        <% end %>
+        <div class="col-12 d-flex justify-content-center my-3">
+          <table>
+            <thead>
+              <th class="col-3"><h4>材料</h4></th>
+              <th class="col-3"><h4>分量</h4></th>
+            </thead>
+            <tbody>
+              <% @post_recipe.ingredients.each do |ingredient| %>
+              <tr>
+                <td class="col-3 text-center"><%= ingredient.name %></td>
+                <td class="col-3 text-center"><%= ingredient.amount %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
 
         <div class="col-12 text-center my-3">
@@ -60,7 +69,7 @@
           <%= f.submit "送信する" %>
         <% end %>
 
-      <div class="text-right">
+      <div class="text-right ml-5">
         <p>コメント件数：<%= @post_recipe.recipe_comments.count %></p>
       </div>
 

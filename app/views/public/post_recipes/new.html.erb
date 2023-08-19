@@ -32,55 +32,84 @@
   </div>
 </div>
 
-<!--材料登録欄-->
+<!-- 材料登録欄 -->
 <div class="container my-3">
-    <div class="row justify-content-center mt-3">
-      <h5 class="col-sm-2">材料</h5>
-      <h5 class="col-sm-2">分量</h5>
-        <%= link_to_add_association '材料の追加', f , :ingredients, partial: "ingredients_fields",
-          # オプション
-          data: {
-            # フォームを追加する場所の指定
-            association_insertion_node: '#ingredients_form',
-            # フォームを前後どの位置に追加するか。(初期値: before)
-          },
-          # フォームオブジェクトを指定する場合(初期値 : f)
-          form_name: 'ingredient'
-            %>
+  <div class="row justify-content-center mt-3">
+    <h5 class="col-sm-2">材料</h5>
+    <h5 class="col-sm-2">分量</h5>
+  </div>
+  <div class="col-12 text-center">
+    <div id="ingredients_form">
+      <%= f.fields_for :ingredients do |ingredient| %>
+        <%= render 'ingredients_fields', ingredient: ingredient %>
+      <% end %>
     </div>
-
-
-      <div class="row justify-content-center" id="ingredients_form">
-        <%= f.fields_for :ingredients do |ingredient| %>
-          <% render 'ingredients_fields', ingredient: ingredient %>
-        <% end %>
-      </div>
+    <%= link_to_add_association '材料の追加', f, :ingredients, partial: "ingredients_fields",
+      data: {
+        association_insertion_node: '.add-ingredient-button',
+        association_insertion_method: 'before'
+      },
+      form_name: 'ingredient',
+      class: 'add-ingredient-button' # 追加
+    %>
+  </div>
 </div>
+<!--材料追加ボタンのJS-->
+<script>
+  $(document).on('turbolinks:load', function() {
+    var addButton = $('.add-ingredient-button');
+    var formWrapper = $('#ingredients_form');
+
+    // Cocoonの初期化
+    formWrapper.on('cocoon:after-insert', function(e, insertedItem) {
+      // 一回目のフォームを一番上に移動
+      if (insertedItem.index() === 0) {
+        formWrapper.prepend(insertedItem);
+      }
+    });
+  });
+</script>
+
 
 <!--作り方登録欄-->
 <div class="container my-3">
   <div class="row justify-content-center mt-3">
     <h5 class="col-sm-2">つくり方</h5>
-        <%= link_to_add_association '作り方の追加', f , :procedures, partial: "procedures_fields",
-            # オプション
-            data: {
-              # フォームを追加する場所の指定
-              association_insertion_node: '#procedures_form',
-              # フォームを前後どの位置に追加するか。(初期値: before)
-              association_insertion_method: 'before'
-            },
-            # フォームオブジェクトを指定する場合(初期値 : f)
-            form_name: 'procedure'
-              %>
   </div>
+      <div class="col-12 text-center">
+        <div class="justify-content-center", id="procedures_form">
+          <%= f.fields_for :procedures do |procedure| %>
+            <% render 'procedures_fields', procedure: procedure %>
+          <% end %>
+        </div>
 
-
-    <div class="row justify-content-center", id="procedures_form">
-      <%= f.fields_for :procedures do |procedure| %>
-        <% render 'procedures_fields', procedure: procedure %>
-      <% end %>
-    </div>
+        <%= link_to_add_association '作り方の追加', f, :procedures, partial: "procedures_fields",
+      data: {
+        association_insertion_node: '.add-procedure-button',
+        association_insertion_method: 'before'
+      },
+      form_name: 'procedure',
+      class: 'add-procedure-button' # 追加
+    %>
+  </div>
 </div>
+
+<!--作り方追加ボタンのJS-->
+<script>
+  $(document).on('turbolinks:load', function() {
+    var addButton = $('.add-procedure-button');
+    var formWrapper = $('#procedures_form');
+
+    // Cocoonの初期化
+    formWrapper.on('cocoon:after-insert', function(e, insertedItem) {
+      // 一回目のフォームを一番上に移動
+      if (insertedItem.index() === 0) {
+        formWrapper.prepend(insertedItem);
+      }
+    });
+  });
+</script>
+
 
     <div class="row justify-content-center mt-4 pb-5">
       <div class="form-inline mx-auto">
