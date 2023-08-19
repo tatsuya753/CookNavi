@@ -1,9 +1,16 @@
-<div><%= notice %><%= alert %></div>
 <%= form_with model: @post_recipe do |f| %>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 text-center my-5"><h1>レシピ投稿</h1></div>
 
+        <% if @post_recipe.errors.any? %>
+          <%= @post_recipe.errors.count %>件のエラーが発生しました
+          <ul>
+            <% @post_recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
       <div class="col-12 text-center mb-4">
         <h4>画像</h4>
