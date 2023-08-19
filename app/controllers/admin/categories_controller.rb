@@ -10,7 +10,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
        @categories = Category.all
-       render :index
+       redirect_to admin_categories_path
     else
       @caterories = Category.all
        redirect_back(fallback_location: root_path)

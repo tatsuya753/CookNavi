@@ -31,47 +31,47 @@
       <!-- 管理者がログインしている場合-->
         <% if admin_signed_in? %>
           <li>
-            <%= link_to "会員一覧", admin_root_path, class: "text-light mx-5" %>
+            <%= link_to "会員一覧", admin_root_path, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "投稿一覧", admin_post_recipes_path, class: "text-light mx-5" %>
+            <%= link_to "投稿一覧", admin_post_recipes_path, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "カテゴリ一覧", admin_categories_path, class: "text-light mx-5" %>
+            <%= link_to "カテゴリ一覧", admin_categories_path, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-light mx-5" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
       <!--ユーザー（会員）がログインしている場合 -->
         <% elsif user_signed_in? %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path, class: "text-light mx-5" %>
+            <%= link_to "投稿一覧", post_recipes_path, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "マイページ", user_path(current_user), class: "text-light mx-5" %>
+            <%= link_to "マイページ", user_path(current_user), class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-light mx-5" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
       <!-- ログインしていない場合 -->
         <% else %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path, class: "text-light mx-5" %>
+            <%= link_to "投稿一覧", post_recipes_path, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "新規登録", new_user_registration_path, class: "text-light mx-5" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "mx-3 button text-decoration-none link-light" %>
           </li>
 
           <li>
-            <%= link_to "ログイン", new_user_session_path ,class: "text-light mx-5" %>
+            <%= link_to "ログイン", new_user_session_path ,class: "mx-3 button text-decoration-none link-light" %>
           </li>
         <% end %>
       </ul>
