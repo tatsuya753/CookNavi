@@ -13,3 +13,84 @@
  *= require_tree .
  *= require_self
  */
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  width: 100%;
+  background-color: #FFC093;
+}
+
+
+main {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10%;
+  background-color: #FFF8EF;
+}
+
+footer {
+  width: 100%;
+  height: 120px;
+  background-color: #FFC093;
+}
+
+/*ヘッダーのボタンの動き*/
+.button{
+  background:#FFC093;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.3em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.button:hover{
+  background:#fff;
+  color:#FFC093;
+}
+.button:before,.button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #fff;
+  transition:300ms ease all;
+}
+.button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.button:hover:before,.button:hover:after{
+  width:100%;
+  transition:400ms ease all;
+}
+
+/*フラッシュメッセージ*/
+.flash-message {
+  border-radius: 5px;
+  padding: 16px 24px;
+  margin: 16px 0px;
+}
+
+.flash-message.notice {
+  background-color: #bcdfff;
+  color: #0067C0;
+  border: solid 1px #0067C0;
+}
+
+.flash-message.alert {
+  background-color: #ffd4d1;
+  color: #930403;
+  border: solid 1px #930403;
+}

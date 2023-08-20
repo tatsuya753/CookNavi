@@ -1,0 +1,39 @@
+<div class="container text-center">
+  <h1 class="py-5">投稿一覧</h1>
+    <div class="row justify-content-center">
+
+        <div class="dropdown col-lg-3">
+          <button class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            カテゴリ一覧
+          </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <% @categories.each do |category| %>
+                <a><%= link_to category.name, post_recipes_path(category_id: category.id), class: "text-decoration-none text-dark rounded p-2" %></a>
+              <% end %>
+            </div>
+        </div>
+    </div>
+
+      <div class="container my-3">
+        <div class="row">
+          <% @post_recipes.each do |post_recipe| %>
+            <div class="card-group col-lg-4">
+              <div class="card my-3">
+                  <%= link_to admin_post_recipe_path(post_recipe) do %>
+                    <%= image_tag post_recipe.get_image(300, 300), class: "img-fluid" %>
+                  <% end %>
+                <div class="card-body">
+                  <div class="card-title"><%= link_to post_recipe.title, admin_post_recipe_path(post_recipe), class: "text-dark" %></div>
+                  <div class="card-text"><%= post_recipe.user.name %></div>
+                    <div class="card-text"><%= post_recipe.keeps.count %> 保存</div>
+                      <%= link_to admin_post_recipe_path(post_recipe) do %>
+                        <p class="card-text">コメント件数：<%= post_recipe.recipe_comments.count %></p>
+                      <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
