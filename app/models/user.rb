@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  validates :name, presence: true
+
   def active_for_authentication?
     super && (is_deleted == false)
   end
