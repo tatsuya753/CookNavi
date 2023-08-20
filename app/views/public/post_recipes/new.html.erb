@@ -1,33 +1,40 @@
-<div><%= notice %><%= alert %></div>
-<%= form_with model: @post_recipe do |f| %>
+<%= form_with model: @post_recipe do |post_recipe| %>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 text-center my-5"><h1>レシピ投稿</h1></div>
 
+        <% if @post_recipe.errors.any? %>
+          <%= @post_recipe.errors.count %>件のエラーが発生しました
+          <ul>
+            <% @post_recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
       <div class="col-12 text-center mb-4">
         <h4>画像</h4>
-        <%= f.file_field :image, accept: "image/*" %>
+        <%= post_recipe.file_field :image, accept: "image/*" %>
       </div>
 
       <div class="col-12 text-center mb-4">
         <h4>カテゴリ</h4>
-        <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
+        <%= post_recipe.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
       </div>
 
       <div class="col-12 text-center mb-4">
         <h4>料理名</h4>
-        <%= f.text_area :title %>
+        <%= post_recipe.text_area :title %>
       </div>
 
       <div class="col-12 text-center mb-4">
         <h4>料理紹介</h4>
-        <%= f.text_area :introduction %>
+        <%= post_recipe.text_area :introduction %>
       </div>
 
       <div class="col-12 text-center mb-4">
         <h4>何人分</h4>
-        <%= f.select :serving, *[1..10], include_blank: "選択してください" %>
+        <%= post_recipe.select :serving, *[1..10], include_blank: "選択してください" %>
       </div>
   </div>
 </div>
@@ -40,11 +47,11 @@
   </div>
   <div class="col-12 text-center">
     <div id="ingredients_form">
-      <%= f.fields_for :ingredients do |ingredient| %>
+      <%= post_recipe.fields_for :ingredients do |ingredient| %>
         <%= render 'ingredients_fields', ingredient: ingredient %>
       <% end %>
     </div>
-    <%= link_to_add_association '材料の追加', f, :ingredients, partial: "ingredients_fields",
+    <%= link_to_add_association '材料の追加', post_recipe, :ingredients, partial: "ingredients_fields",
       data: {
         association_insertion_node: '.add-ingredient-button',
         association_insertion_method: 'before'
@@ -78,12 +85,12 @@
   </div>
       <div class="col-12 text-center">
         <div class="justify-content-center", id="procedures_form">
-          <%= f.fields_for :procedures do |procedure| %>
+          <%= post_recipe.fields_for :procedures do |procedure| %>
             <% render 'procedures_fields', procedure: procedure %>
           <% end %>
         </div>
 
-        <%= link_to_add_association '作り方の追加', f, :procedures, partial: "procedures_fields",
+        <%= link_to_add_association '作り方の追加', post_recipe, :procedures, partial: "procedures_fields",
       data: {
         association_insertion_node: '.add-procedure-button',
         association_insertion_method: 'before'
@@ -113,8 +120,8 @@
 
     <div class="row justify-content-center mt-4 pb-5">
       <div class="form-inline mx-auto">
-        <%= f.submit 'レシピを公開', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
-        <%= f.submit '下書きに保存', :name => 'post_status', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
+        <%= post_recipe.submit 'レシピを公開', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
+        <%= post_recipe.submit '下書きに保存', :name => 'post_status', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
       </div>
     </div>
 <% end %>

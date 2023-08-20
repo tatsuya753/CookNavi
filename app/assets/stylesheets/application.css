@@ -38,6 +38,7 @@ footer {
   background-color: #FFC093;
 }
 
+/*ヘッダーのボタンの動き*/
 .button{
   background:#FFC093;
   color:#fff;
@@ -73,4 +74,23 @@ footer {
 .button:hover:before,.button:hover:after{
   width:100%;
   transition:400ms ease all;
+}
+
+/*フラッシュメッセージ*/
+.flash-message {
+  border-radius: 5px;
+  padding: 16px 24px;
+  margin: 16px 0px;
+}
+
+.flash-message.notice {
+  background-color: #bcdfff;
+  color: #0067C0;
+  border: solid 1px #0067C0;
+}
+
+.flash-message.alert {
+  background-color: #ffd4d1;
+  color: #930403;
+  border: solid 1px #930403;
 }

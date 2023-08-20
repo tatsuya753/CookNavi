@@ -19,11 +19,12 @@ class PostRecipe < ApplicationRecord
   # 投稿バリデーション
   with_options presence: true, on: :publicize do
     validates :image
+    validates :category
     validates :serving
     validates :title
     validates :introduction
   end
-  validates :title, length: { maximum: 14 }, on: :publicize
+  validates :title, length: { maximum: 15 }, on: :publicize
   validates :introduction, length: { maximum: 80 }, on: :publicize
 
   def get_image(width, height)
