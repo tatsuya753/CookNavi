@@ -2,29 +2,29 @@
   <h1 class="py-5">プロフィール編集</h1>
     <div class="row justify-content-center">
 
-    <%= form_with model: @user do |f| %>
+    <%= form_with model: @user do |user| %>
         <div class="col-12 my-3">
           <h4>画像</h4>
-          <%= f.file_field :profile_image, accept: "image/*" %>
+          <%= user.file_field :profile_image, accept: "image/*" %>
         </div>
-  
+
         <div class="col-12 my-3">
           <h4>名前</h4>
-          <%= f.text_field :name %>
+          <%= user.text_field :name %>
         </div>
-  
+
         <div class="col-12 my-3">
           <h4>メールアドレス</h4>
-          <%= f.text_field :email %>
+          <%= user.text_field :email %>
         </div>
-  
+
       <div class="row mt-5">
         <div class="col-12">
-          <%= f.submit '変更を保存', class:"btn btn-success" %>
+          <%= user.submit '変更を保存', class:"btn btn-success" %>
           <%= link_to "退会する", users_check_users_path,class:"btn btn-danger ml-5" %>
         </div>
       </div>
-      
+
     <% end %>
   </div>
 </div>
