@@ -12,7 +12,7 @@ class Public::PostRecipesController < ApplicationController
     elsif params[:word]
           @post_recipes = PostRecipe.where(post_status: false).looks(params[:word]).page(params[:page])
     else
-          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user]).page(params[:page])
+          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user]).page(params[:page]).per(1)
     end
   end
 
