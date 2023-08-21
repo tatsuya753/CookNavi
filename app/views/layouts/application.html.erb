@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/0e30cc8c7c.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -49,15 +50,21 @@
       <!--ユーザー（会員）がログインしている場合 -->
         <% elsif user_signed_in? %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to post_recipes_path, class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-book-open">投稿一覧</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "マイページ", user_path(current_user), class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to user_path(current_user), class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-user">マイページ</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-right-from-bracket">ログアウト</i>
+            <% end %>
           </li>
 
       <!-- ログインしていない場合 -->

@@ -8,9 +8,9 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_posts = PostRecipe.where(user_id: @user, post_status: false).order(created_at: "DESC")
-    @kept_posts = PostRecipe.includes(:user).joins(:keeps).where(post_status: false,'keeps.user_id': @user.id).order('keeps.created_at': "DESC")
-    @draft_posts = PostRecipe.where(user_id: @user, post_status: true).order(created_at: "DESC")
+    @user_posts = PostRecipe.where(user_id: @user, post_status: false).order(created_at: "DESC").page(params[:page]).per(3)
+    @kept_posts = PostRecipe.includes(:user).joins(:keeps).where(post_status: false,'keeps.user_id': @user.id).order('keeps.created_at': "DESC").page(params[:page]).per(3)
+    @draft_posts = PostRecipe.where(user_id: @user, post_status: true).order(created_at: "DESC").page(params[:page]).per(3)
   end
 
   def edit

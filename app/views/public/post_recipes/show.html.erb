@@ -31,16 +31,16 @@
         </div>
 
         <div class="col-12 d-flex justify-content-center my-3">
-          <table>
+          <table class="col-4">
             <thead>
-              <th class="col-3"><h4>材料</h4></th>
-              <th class="col-3"><h4>分量</h4></th>
+              <th class="col-4 text-center"><h4>材料</h4></th>
+              <th class="col-4 text-center"><h4>分量</h4></th>
             </thead>
             <tbody>
               <% @post_recipe.ingredients.each do |ingredient| %>
               <tr>
-                <td class="col-3 text-center"><%= ingredient.name %></td>
-                <td class="col-3 text-center"><%= ingredient.amount %></td>
+                <td class="col-4 text-center"><%= ingredient.name %></td>
+                <td class="col-4 text-center"><%= ingredient.amount %></td>
               </tr>
               <% end %>
             </tbody>
@@ -74,7 +74,7 @@
       </div>
 
 
-      <div class="row overflow-auto" style="width:500px; height:100px;">
+      <div class="row overflow-auto" style="width:500px; height:200px;">
         <% @post_recipe.recipe_comments.each do |recipe_comment| %>
       <div class="col-2 text-center">
           <p><%= image_tag recipe_comment.user.get_profile_image(80, 80) %></p>
