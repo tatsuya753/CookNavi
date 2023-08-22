@@ -56,8 +56,8 @@
 
       <div class="col-12 text-center my-3">
         <% if @post_recipe.user == current_user %>
-        <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white' %>
-        <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white ml-5', "data-confirm" => "本当に削除しますか？" %>
+        <%= link_to "編集", edit_post_recipe_path(@post_recipe.id), class: 'btn btn-md btn-success text-white col-3' %>
+        <%= link_to "削除", post_recipe_path(@post_recipe.id), method: :delete, class: 'btn btn-md btn-danger text-white col-3 ml-5', "data-confirm" => "本当に削除しますか？" %>
         <% end %>
       </div>
   </div>
@@ -74,7 +74,7 @@
       </div>
 
 
-      <div class="row overflow-auto" style="width:500px; height:200px;">
+      <div class="row overflow-auto" style="width:600px; height:200px;">
         <% @post_recipe.recipe_comments.each do |recipe_comment| %>
       <div class="col-2 text-center">
           <p><%= image_tag recipe_comment.user.get_profile_image(80, 80) %></p>

@@ -7,6 +7,7 @@
   width: 100%;
   padding: 10px;
   cursor: pointer;
+  color: #696969;
   border-left: solid 1px #CCC;
   border-bottom: solid 1px #CCC;
 }
@@ -16,8 +17,8 @@
 // タブがactiveのときのデザイン
 .tab-active {
   color: #FFF;
-  background: #19b5d1;
-  transition: all 0.2s ease-in-out;
+  background: #FFC093;
+  transition: all 0.3s ease-in-out;
 }
 // タブの中身、最初は非表示
 .tabbox {
@@ -27,7 +28,20 @@
 // box-showクラスのものだけ表示
 .box-show {
   display: block;
+  animation-name: displayAnime;/*ふわっと表示させるためのアニメーション*/
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
 }
+
+@keyframes displayAnime{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 // hover時のアクション
 .tab:hover{
   box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);

@@ -22,9 +22,10 @@
         <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
           <div class="input-group">
             <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
-              <%= f.submit "検索", class: "btn text-white form-control"%>
+            <%= button_tag type: "submit", class: "btn btn-outline-light text-secondary form-control" do %>
+            <i class="fas fa-search"></i>
+            <% end %>
         <% end %>
-              </span>
            </div>
       </div>
 
@@ -32,26 +33,34 @@
       <!-- 管理者がログインしている場合-->
         <% if admin_signed_in? %>
           <li>
-            <%= link_to "会員一覧", admin_root_path, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to admin_root_path, class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-users">会員一覧</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "投稿一覧", admin_post_recipes_path, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to admin_post_recipes_path, class: "mr-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-rectangle-list">投稿一覧</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "カテゴリ一覧", admin_categories_path, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to admin_categories_path, class: "mr-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-tag">カテゴリ一覧</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to destroy_admin_session_path, method: :delete, class: "mr-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-right-from-bracket">ログアウト</i>
+            <% end %>
           </li>
 
       <!--ユーザー（会員）がログインしている場合 -->
         <% elsif user_signed_in? %>
           <li>
             <%= link_to post_recipes_path, class: "mx-3 button text-decoration-none link-light" do %>
-            <i class="fa-solid fa-book-open">投稿一覧</i>
+            <i class="fa-solid fa-rectangle-list">投稿一覧</i>
             <% end %>
           </li>
 
@@ -70,15 +79,21 @@
       <!-- ログインしていない場合 -->
         <% else %>
           <li>
-            <%= link_to "投稿一覧", post_recipes_path, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to post_recipes_path, class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-rectangle-list">投稿一覧</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "新規登録", new_user_registration_path, class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to new_user_registration_path, class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-user-plus">新規登録</i>
+            <% end %>
           </li>
 
           <li>
-            <%= link_to "ログイン", new_user_session_path ,class: "mx-3 button text-decoration-none link-light" %>
+            <%= link_to new_user_session_path ,class: "mx-3 button text-decoration-none link-light" do %>
+            <i class="fa-solid fa-right-to-bracket">ログイン</i>
+            <% end %>
           </li>
         <% end %>
       </ul>
@@ -86,7 +101,6 @@
   </header>
 
   <main>
-
     <% flash.each do |message_type, message| %>
       <div class="flash-message <%= message_type %>"><%= message %></div>
     <% end %>

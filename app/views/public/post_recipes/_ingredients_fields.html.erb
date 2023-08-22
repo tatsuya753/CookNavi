@@ -1,7 +1,7 @@
 <div class="nested-fields my-3">
   <div class="row justify-content-center">
-      <%= ingredient.text_field :name, placeholder: "例）にんじん", class: "ml-3 mb-2" %>
-      <%= ingredient.text_field :amount, placeholder: "例）一本", class: "ml-3 mb-2" %>
+      <%= ingredient.text_field :name, placeholder: "例）にんじん", class: "ml-3 mb-2", style: "height:50px;" %>
+      <%= ingredient.text_field :amount, placeholder: "例）一本", class: "ml-3 mb-2", style: "height:50px;" %>
       <%= link_to_remove_association "削除", ingredient, class: "ml-3 btn btn-sm btn-danger text-white" %>
   </div>
 </div>
