@@ -1,6 +1,6 @@
 <div class="nested-fields my-3">
   <div class="row justify-content-center">
-    <%= procedure.text_area :body, placeholder:"手順を記入" %>
+    <%= procedure.text_area :body, placeholder:"手順を記入", class: "col-4", style: "height: 80px;" %>
     <%= link_to_remove_association "削除", procedure, class: 'ml-3 btn btn-sm btn-danger text-white' %>
   </div>
 </div>
