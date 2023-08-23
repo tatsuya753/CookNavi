@@ -61,22 +61,6 @@
     %>
   </div>
 </div>
-<!--材料追加ボタンのJS-->
-<script>
-  $(document).on('turbolinks:load', function() {
-    var addButton = $('.add-ingredient-button');
-    var formWrapper = $('#ingredients_form');
-
-    // Cocoonの初期化
-    formWrapper.on('cocoon:after-insert', function(e, insertedItem) {
-      // 一回目のフォームを一番上に移動
-      if (insertedItem.index() === 0) {
-        formWrapper.prepend(insertedItem);
-      }
-    });
-  });
-</script>
-
 
 <!--作り方登録欄-->
 <div class="container my-3">
@@ -90,34 +74,17 @@
           <% end %>
         </div>
 
-        <%= link_to_add_association '作り方の追加', post_recipe, :procedures, partial: "procedures_fields",
-      data: {
-        association_insertion_node: '.add-procedure-button',
-        association_insertion_method: 'before'
-      },
-      form_name: 'procedure',
-      class: 'add-procedure-button btn btn-success text-white' # 追加
-    %>
-  </div>
+          <%= link_to_add_association '作り方の追加', post_recipe, :procedures, partial: "procedures_fields",
+            data: {
+              association_insertion_node: '.add-procedure-button',
+              association_insertion_method: 'before'
+            },
+            form_name: 'procedure',
+            class: 'add-procedure-button btn btn-success text-white' # 追加
+          %>
+      </div>
+
 </div>
-
-<!--作り方追加ボタンのJS-->
-<script>
-  $(document).on('turbolinks:load', function() {
-    var addButton = $('.add-procedure-button');
-    var formWrapper = $('#procedures_form');
-
-    // Cocoonの初期化
-    formWrapper.on('cocoon:after-insert', function(e, insertedItem) {
-      // 一回目のフォームを一番上に移動
-      if (insertedItem.index() === 0) {
-        formWrapper.prepend(insertedItem);
-      }
-    });
-  });
-</script>
-
-
     <div class="row justify-content-center mt-5 pb-5">
       <div class="form-inline mx-auto">
         <%= post_recipe.submit 'レシピを公開', :name => 'post', class: 'mr-5 btn btn-lg btn-warning text-white' %>

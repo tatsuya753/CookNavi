@@ -29,7 +29,11 @@
                 <div class="card-body">
                   <div class="card-title"><%= link_to post_recipe.title, post_recipe_path(post_recipe), class: "text-dark" %></div>
                   <div class="card-text"><%= post_recipe.user.name %></div>
-                    <div class="card-text"><%= render 'keeps', post_recipe: post_recipe %></div>
+                  
+                    <div class="card-text", id="keep_btns_<%= post_recipe.id %>">
+                      <%= render 'public/keeps/keep-btn', post_recipe: post_recipe %>
+                    </div>
+                    
                       <%= link_to post_recipe_path(post_recipe) do %>
                         <p class="card-text">コメント件数：<%= post_recipe.recipe_comments.count %></p>
                       <% end %>
@@ -65,11 +69,13 @@
               <div class="card-body">
                 <div class="card-title"><%= link_to post_recipe.title, post_recipe_path(post_recipe), class: "text-dark" %></div>
                 <div class="card-text mb-2"><%= post_recipe.user.name %></div>
+                
                     <p class="card-text">
                       <%= link_to post_recipe_keeps_path(post_recipe), method: :post do %>
                         <%= post_recipe.keeps.count %><i class="fa-solid fa-bookmark ml-2">保存</i>
                       <% end %>
                     </p>
+                    
                     <%= link_to post_recipe_path(post_recipe) do %>
                     <p>コメント件数：<%= post_recipe.recipe_comments.count %></p>
                   <% end %>
