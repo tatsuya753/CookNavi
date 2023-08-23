@@ -3,14 +3,13 @@ class Admin::PostRecipesController < ApplicationController
   def index
     @recipe_comment = RecipeComment.all
     @categories = Category.all
-    if
-      params[:category_id].present?
-      @post_recipes = PostRecipe.where("category_id LIKE?","%#{params[:category_id]}%")
-    elsif
-      params[:word].present?
-      @post_recipes = PostRecipe.where('title LIKE ?', "%#{params[:word]}%")
+    if  params[:category_id]
+        @category = Category.find(params[:category_id])
+        @post_recipes = @category.post_recipes.where(post_status: false).page(params[:page])
+    elsif params[:word]
+          @post_recipes = PostRecipe.where(post_status: false).looks(params[:word]).page(params[:page])
     else
-      @post_recipes = PostRecipe.all
+          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user]).page(params[:page])
     end
   end
 

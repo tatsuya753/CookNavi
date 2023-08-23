@@ -61,6 +61,8 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 # フォーム欄の動的な追加
 gem "cocoon"
+gem 'kaminari','~> 1.2.1'
+gem 'jquery-rails'
 
 # MySQLを利用するために必要なgem,環境変数を管理するGem
 gem 'dotenv-rails'

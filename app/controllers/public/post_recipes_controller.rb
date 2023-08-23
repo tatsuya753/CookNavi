@@ -7,12 +7,12 @@ class Public::PostRecipesController < ApplicationController
 
     if  params[:category_id]
         @category = Category.find(params[:category_id])
-        @post_recipes = @category.post_recipes.where(post_status: false)
+        @post_recipes = @category.post_recipes.where(post_status: false).page(params[:page])
 
     elsif params[:word]
-          @post_recipes = PostRecipe.where(post_status: false).looks(params[:word])
+          @post_recipes = PostRecipe.where(post_status: false).looks(params[:word]).page(params[:page])
     else
-          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user])
+          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user]).page(params[:page])
     end
   end
 

@@ -1,0 +1,13 @@
+<% if post_recipe.kept_by?(current_user) %>
+    <p>
+      <%= link_to post_recipe_keeps_path(post_recipe), method: :delete, remote: true, data: {"turbolinks" => false} do %>
+        <%= post_recipe.keeps.count %><i class="fa-regular fa-bookmark ml-2">保存を外す</i>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_recipe_keeps_path(post_recipe), method: :post, remote: true, data: {"turbolinks" => false} do %>
+        <%= post_recipe.keeps.count %><i class="fa-solid fa-bookmark ml-2">保存</i>
+      <% end %>
+    </p>
+  <% end %>

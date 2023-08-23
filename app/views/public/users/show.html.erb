@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'tab' %>
+
 <div class="container">
   <div class="row">
     <div class="col-10 text-center">
@@ -7,20 +9,25 @@
 
       <!--ログインユーザー自身の場合-->
         <% if @user == current_user %>
-          <%= link_to "レシピ投稿", new_post_recipe_path, class: 'btn btn-md btn-success text-white' %>
-          <%= link_to "プロフィール編集", edit_user_path(current_user), class: 'btn btn-md btn-success text-white' %>
+          <%= link_to new_post_recipe_path, class: 'btn btn-md btn-success text-white mr-2' do %>
+            <i class="fa-solid fa-utensils">レシピ投稿</i>
+          <% end %>
+          <%= link_to edit_user_path(current_user), class: 'btn btn-md btn-success text-white' do %>
+            <i class="fa-solid fa-user-gear">プロフィール編集</i>
+          <% end %>
+
     </div>
 
     <div class="col-10 mt-5">
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item col-4 tab tab-active">
-          保存済み一覧
+          <i class="fa-solid fa-bookmark">保存済み一覧</i>
         </li>
         <li class="list-group-item col-4 tab">
-          投稿レシピ一覧
+          <i class="fa-solid fa-rectangle-list">投稿レシピ一覧</i>
         </li>
         <li class="list-group-item col-4 tab">
-          下書き一覧
+          <i class="fa-solid fa-pen-to-square">下書き一覧</i>
         </li>
       </ul>
 
@@ -33,7 +40,7 @@
             <div class="d-flex flex-wrap">
               <% @kept_posts.each do |kept_post| %>
                 <div class="card text-center mt-3 pt-3 px-2 ml-5">
-                  <div class:"card-img-top" style="height:200px;">
+                  <div class="card-img-top" style="height:200px;">
                    <%= image_tag kept_post.get_image(200, 200) %>
                   </div>
                   <%= link_to kept_post.title, post_recipe_path(kept_post), class:'card-text text-wrap font-weight-bold pt-2' %>
@@ -43,6 +50,7 @@
             </div>
           <% end %>
         </div>
+        <div class="d-flex justify-content-center"><%= paginate @kept_posts %></div>
     </div>
 
     <!--タブ、会員本人が投稿したレシピ-->
@@ -61,6 +69,7 @@
               <% end %>
             </div>
           <% end %>
+          <div class="d-flex justify-content-center"><%= paginate @user_posts %></div>
     </div>
 
     <!--タブ、下書き保存したレシピ-->
@@ -68,7 +77,7 @@
       <% if @draft_posts.empty? %>
             <h6>下書き中のレシピはまだありません。</h6>
           <% else %>
-            <table style='width: 90%' class="table ml-2">
+            <table style="width: 90%" class="table ml-2">
             <% @draft_posts.each do |draft_post| %>
               <tr class="border-bttom align-middle">
                 <td class="p-2 text-center">
@@ -84,6 +93,7 @@
             <% end %>
             </table>
           <% end %>
+          <div class="d-flex justify-content-center"><%= paginate @draft_posts %></div>
     </div>
   </div>
 

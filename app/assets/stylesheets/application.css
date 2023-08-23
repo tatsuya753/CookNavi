@@ -94,3 +94,19 @@ footer {
   color: #930403;
   border: solid 1px #930403;
 }
+
+
+.pagination>li>a {
+  border: none;
+  color: #696969;
+  background-color: #FFF8EF;
+}
+
+.pagination>.active>a {
+  border-radius: 20px;
+}
+
+.pagination>li>a:hover {
+  border-radius: 15px;
+}
+
