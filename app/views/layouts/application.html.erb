@@ -65,7 +65,7 @@
           </li>
 
           <li>
-            <%= link_to user_path(current_user), class: "mx-3 button text-decoration-none link-light" do %>
+            <%= link_to user_path(current_user), data: {"turbolinks" => false}, class: "mx-3 button text-decoration-none link-light" do %>
             <i class="fa-solid fa-user">マイページ</i>
             <% end %>
           </li>
