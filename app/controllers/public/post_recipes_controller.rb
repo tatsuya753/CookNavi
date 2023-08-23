@@ -95,7 +95,7 @@ class Public::PostRecipesController < ApplicationController
   def destroy
     post_recipe = PostRecipe.find(params[:id])
     post_recipe.destroy
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: "レシピを削除しました！"
   end
 
 private

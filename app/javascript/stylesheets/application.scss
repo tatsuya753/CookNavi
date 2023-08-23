@@ -47,3 +47,19 @@
   box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.5);
   transform: translateY(-1px);
 }
+
+// 画像フォーム
+.image {
+  color: #ffffff;
+  padding: 10px 16px 8px;
+  margin-top: 8px;
+  display: flex;
+}
+
+.imageInput {
+  color: #000000;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}

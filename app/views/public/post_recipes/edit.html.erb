@@ -1,18 +1,33 @@
-<div><%= notice %><%= alert %></div>
+<%= javascript_pack_tag 'image' %>
+
 <%= form_with model: @post_recipe do |post_recipe| %>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 text-center my-5"><h1>レシピ編集</h1></div>
 
+        <% if @post_recipe.errors.any? %>
+          <%= @post_recipe.errors.count %>件のエラーが発生しました
+          <ul>
+            <% @post_recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
 
       <div class="col-12 text-center mb-4">
-        <h4>画像</h4>
-        <%= post_recipe.file_field :image, accept: "image/*" %>
+          <h4>画像</h4>
+          <%= image_tag @post_recipe.get_image(300, 300), class: "img-fluid" %>
+            <h6 class="mt-4">↓画像の変更↓</h6>
+        <div class='image justify-content-center'>
+          <label class="labelName" for="imageSpace"></label>
+          <%= post_recipe.file_field :image, accept: "image/*", class: 'imageInput' %>
+        </div>
+        <div class="col-12 prevImageBox d-flex justify-content-center"></div>
       </div>
 
-      <div class="col-12 text-center mb-4">
+      <div class="col-12 text-center my-4">
         <h4>カテゴリ</h4>
-        <%= post_recipe.select :category_id, options_from_collection_for_select(Category.all, :id, :name), include_blank: "選択してください" %>
+        <%= post_recipe.select :category_id, options_from_collection_for_select(Category.all, :id, :name) %>
       </div>
 
       <div class="col-12 text-center mb-4">

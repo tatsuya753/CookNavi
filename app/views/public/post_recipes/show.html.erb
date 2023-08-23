@@ -4,7 +4,7 @@
 
         <div class="col-12 text-center my-3"><%= image_tag @post_recipe.get_image(300, 300) %></div>
         <%= link_to user_path(@user) do %>
-        <div class="col-2 text-center my-3">by<%= @post_recipe.user.name %></div>
+        <div class="text-center my-3">by<%= @post_recipe.user.name %></div>
         <% end %>
 
         <div class="col-lg-2 text-center my-3">
@@ -23,7 +23,7 @@
         <div><%= @post_recipe.title %></div>
         </div>
 
-        <div class="col-12 text-center my-3">
+        <div class="col-7 text-center my-3">
         <h4>料理紹介</h4>
         <div><%= @post_recipe.introduction %></div>
         </div>
