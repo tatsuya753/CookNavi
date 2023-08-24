@@ -17,11 +17,11 @@
     <!-- 管理者がログインしている場合-->
     <% if admin_signed_in? %>
     <nav class="navbar navbar-expand-lg border-bottom">
-      <div class="col-lg-2">
+      <div class="col-lg-1">
         <h2><%= link_to 'LOGO', admin_root_path, class: "text-dark text-decoration-none" %></h2>
       </div>
 
-        <div class="col-lg-4 d-flex justify-content-center">
+        <div class="col-lg-3 d-flex justify-content-center">
           <%= form_with url: admin_post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
             <div class="input-group">
               <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
@@ -34,25 +34,25 @@
 
         <ul class="navbar-nav ml-auto">
           <li>
-            <%= link_to admin_root_path, class: "mx-3 button text-decoration-none link-light" do %>
+            <%= link_to admin_root_path, class: "button text-decoration-none link-light" do %>
             <i class="fa-solid fa-users">会員一覧</i>
             <% end %>
           </li>
 
           <li>
-            <%= link_to admin_post_recipes_path, class: "mr-3 button text-decoration-none link-light" do %>
+            <%= link_to admin_post_recipes_path, class: "button text-decoration-none link-light" do %>
             <i class="fa-solid fa-rectangle-list">投稿一覧</i>
             <% end %>
           </li>
 
           <li>
-            <%= link_to admin_categories_path, class: "mr-3 button text-decoration-none link-light" do %>
+            <%= link_to admin_categories_path, class: "button text-decoration-none link-light" do %>
             <i class="fa-solid fa-tag">カテゴリ一覧</i>
             <% end %>
           </li>
 
           <li>
-            <%= link_to destroy_admin_session_path, method: :delete, class: "mr-3 button text-decoration-none link-light" do %>
+            <%= link_to destroy_admin_session_path, method: :delete, class: "button text-decoration-none link-light" do %>
             <i class="fa-solid fa-right-from-bracket">ログアウト</i>
             <% end %>
           </li>
