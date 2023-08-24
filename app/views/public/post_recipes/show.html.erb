@@ -79,8 +79,10 @@
       <div class="row align-items-center overflow-auto border rounded p-2 ml-5" style="width:600px; height:250px;">
         <% @post_recipe.recipe_comments.each do |recipe_comment| %>
       <div class="col-3 text-center text-break">
+          <%= link_to user_path(recipe_comment.user) do %>
           <p><%= image_tag recipe_comment.user.get_profile_image(80, 80) %></p>
           <p><%= recipe_comment.user.name %></p>
+          <% end %>
       </div>
 
       <div class="col-7 d-flex align-items-center text-break border rounded">
