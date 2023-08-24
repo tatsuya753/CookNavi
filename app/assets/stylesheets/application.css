@@ -38,6 +38,9 @@ footer {
   background-color: #FFC093;
 }
 
+.btn-group {
+  margin-top: 150px;
+}
 
 /*ヘッダーのボタンの動き*/
 .button{

@@ -37,6 +37,8 @@ Rails.application.routes.draw do
           get  '/users/check' => 'users#check'
           # 論理削除用のルーティング
           patch  '/users/withdraw' => 'users#withdraw'
+
+          delete  '/users/destroy_image' => 'users#destroy_image'
         end
       end
     resources :post_recipes do

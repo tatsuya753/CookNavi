@@ -12,7 +12,7 @@ $(function(){
                   </div>
                   <div class="lower-box">
                     <div class="delete-box">
-                      <div class="delete-btn" data-delete-id= ${id}>削除</div>
+                      <div class="delete-btn" data-delete-id= ${id}>画像を選びなおす</div>
                     </div>
                   </div>
                 </div>`

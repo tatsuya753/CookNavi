@@ -6,7 +6,7 @@
     <div class="col-12 text-center my-5"><h1>レシピ編集</h1></div>
 
         <% if @post_recipe.errors.any? %>
-          <%= @post_recipe.errors.count %>件のエラーが発生しました
+          <h5 class="col-12 text-center"><%= @post_recipe.errors.count %>件のエラーが発生しました。</h5>
           <ul>
             <% @post_recipe.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -93,18 +93,18 @@
   </div>
 </div>
 
-      <div class="row mt-4">
-      <div class="form-inline mx-auto">
+      <div class="row justify-content-center">
+      <div class="form-inline btn-group">
         <% if @post_recipe.post_status == true %>
-          <%= post_recipe.submit "レシピを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
-          <%= post_recipe.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+          <%= post_recipe.submit "レシピを公開", :name => 'publicize_draft', class:'mr-5 btn btn-lg btn-warning' %>
+          <%= post_recipe.submit "下書きを更新", :name => 'update_draft', class:'btn btn-lg btn-outline-secondary' %>
         <% else %>
-          <%= post_recipe.submit "レシピを更新", :name => 'update_post', class:'btn btn-sm btn-warning text-light' %>
+          <%= post_recipe.submit "レシピを更新", :name => 'update_post', class:'btn btn-lg btn-warning text-light' %>
         <% end %>
       </div>
     </div>
     <div class="mt-4 pb-3 text-center">
-      <u><%= link_to "レシピを削除", post_recipe_path, method: :delete, data: {confirm: "このレシピを削除しますか？"}, class:'btn btn-sm btn-danger text-light' %></u>
+      <u><%= link_to "レシピを削除", post_recipe_path, method: :delete, data: {confirm: "このレシピを削除しますか？"}, class:'btn btn-lg btn-danger text-light' %></u>
     </div>
   </div>
 <% end %>

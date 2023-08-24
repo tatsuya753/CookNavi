@@ -18,9 +18,19 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+        user = current_user
+    if  user.update(user_params)
+        redirect_to user_path
+    else
+        flash[:alert] = "プロフィールの更新ができませんでした。入力内容をご確認のうえ再度お試しください"
+        redirect_to request.referer
+    end
+  end
+
+  def destroy_image
     user = current_user
-    user.update(user_params)
-    redirect_to user_path
+    user.profile_image.destroy  # 画像を削除する
+    redirect_to edit_user_path(user), notice: "画像が削除されました。"
   end
 
   def withdraw

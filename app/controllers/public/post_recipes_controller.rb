@@ -67,8 +67,8 @@ class Public::PostRecipesController < ApplicationController
         redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
       else
         @post_recipe.post_status = true
-        flash.now[:alert] = "レシピを公開できませんでした。入力内容をご確認のうえ再度お試しください"
-        render :edit
+        flash[:alert] = "レシピを公開できませんでした。入力内容をご確認のうえ再度お試しください"
+        redirect_to request.referer
       end
 
     # 公開済みレシピの更新の場合
