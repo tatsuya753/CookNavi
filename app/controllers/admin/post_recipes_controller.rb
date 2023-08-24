@@ -3,6 +3,7 @@ class Admin::PostRecipesController < ApplicationController
   def index
     @recipe_comment = RecipeComment.all
     @categories = Category.all
+    
     if  params[:category_id]
         @category = Category.find(params[:category_id])
         @post_recipes = @category.post_recipes.where(post_status: false).page(params[:page])

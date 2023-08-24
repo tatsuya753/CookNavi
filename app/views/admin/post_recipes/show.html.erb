@@ -4,7 +4,7 @@
 
         <div class="col-12 text-center my-3"><%= image_tag @post_recipe.get_image(300, 300) %></div>
         <%= link_to admin_user_path(@post_recipe.user.id) do %>
-        <div class="col-2 text-center my-3">by<%= @post_recipe.user.name %></div>
+        <div class="text-center my-3">by<%= @post_recipe.user.name %></div>
         <% end %>
 
         <div class="col-lg-2 text-center my-3">
@@ -31,16 +31,16 @@
         </div>
 
         <div class="col-12 d-flex justify-content-center my-3">
-          <table>
+          <table class="col-4">
             <thead>
-              <th class="col-3"><h4>材料</h4></th>
-              <th class="col-3"><h4>分量</h4></th>
+              <th class="col-4 text-center"><h4>材料</h4></th>
+              <th class="col-4 text-center"><h4>分量</h4></th>
             </thead>
             <tbody>
               <% @post_recipe.ingredients.each do |ingredient| %>
               <tr>
-                <td class="col-3 text-center"><%= ingredient.name %></td>
-                <td class="col-3 text-center"><%= ingredient.amount %></td>
+                <td class="col-4 text-center"><%= ingredient.name %></td>
+                <td class="col-4 text-center"><%= ingredient.amount %></td>
               </tr>
               <% end %>
             </tbody>
@@ -61,11 +61,13 @@
         <p>コメント件数：<%= @post_recipe.recipe_comments.count %></p>
       </div>
 
-      <div class="row overflow-auto" style="width:500px; height:100px;">
+      <div class="row align-items-center overflow-auto border rounded p-2 ml-5" style="width:700px; height:250px;">
         <% @post_recipe.recipe_comments.each do |recipe_comment| %>
-      <div class="col-2 text-center">
+      <div class="col-3 text-center text-break">
+          <%= link_to admin_user_path(recipe_comment.user) do %>
           <p><%= image_tag recipe_comment.user.get_profile_image(80, 80) %></p>
           <p><%= recipe_comment.user.name %></p>
+          <% end %>
       </div>
 
       <div class="col-7 d-flex align-items-center justify-content-center text-break">
@@ -73,7 +75,7 @@
         <%= recipe_comment.comment %>
       </div>
 
-            <div class="col-3 text-center d-flex align-items-center">
+            <div class="col-2 text-center d-flex align-items-center">
               <%= link_to "削除", admin_post_recipe_recipe_comment_path(recipe_comment.post_recipe, recipe_comment), method: :delete, data: {confirm: "このコメントを削除しますか？"}, class: 'btn btn-md btn-danger text-white' %>
             </div>
       <% end %>
