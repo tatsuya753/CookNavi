@@ -65,7 +65,7 @@
           </li>
 
           <li>
-            <%= link_to user_path(current_user), class: "mx-3 button text-decoration-none link-light" do %>
+            <%= link_to user_path(current_user), data: {"turbolinks" => false}, class: "mx-3 button text-decoration-none link-light" do %>
             <i class="fa-solid fa-user">マイページ</i>
             <% end %>
           </li>
@@ -109,9 +109,10 @@
   </main>
 
     <footer>
-      <div>
-        <h4 class="logo text-center pt-5"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
-        <p class="text-center">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
+      <div class="text-center">
+        <h4 class="logo text-center"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
+        <h5 class="text-center my-4 text-light"><i class="fa-solid fa-utensils">おいしさがつながる、レシピのコミュニティ</i></h5>
+        <%= link_to "管理者はこちら", new_admin_session_path,class: "text-dark", style: "text-decoration: none;" %>
       </div>
     </footer>
   </body>

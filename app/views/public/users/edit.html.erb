@@ -1,12 +1,21 @@
+<%= javascript_pack_tag 'image' %>
+
 <div class="container text-center">
   <h1 class="py-5">プロフィール編集</h1>
     <div class="row justify-content-center">
-
     <%= form_with model: @user do |user| %>
-        <div class="col-12 my-3">
+        <div class="col-12 text-center my-3">
+          <div class="col-12">
+            <%= image_tag @user.get_profile_image(300, 300)%>
+          </div>
+          <%= link_to "画像を削除する", users_destroy_image_users_path(@user), method: :delete, data: { confirm: "画像を削除してもよろしいですか？" }, class: "btn btn-danger my-3" %>
           <h4>画像</h4>
-          <%= user.file_field :profile_image, accept: "image/*" %>
+        <div class='image justify-content-center'>
+          <label class="labelName" for="imageSpace"></label>
+          <%= user.file_field :profile_image, accept: "image/*", class: 'imageInput' %>
         </div>
+        <div class="col-12 prevImageBox d-flex justify-content-center"></div>
+      </div>
 
         <div class="col-12 my-3">
           <h4>名前</h4>

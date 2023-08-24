@@ -19,7 +19,6 @@ class PostRecipe < ApplicationRecord
   # 投稿バリデーション
   with_options presence: true, on: :publicize do
     validates :image
-    validates :category
     validates :serving
     validates :title
     validates :introduction

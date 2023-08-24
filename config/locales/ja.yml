@@ -1,5 +1,12 @@
 ja:
   activerecord:
+    attributes:
+      post_recipe:
+        category: "カテゴリ"
+        image: "画像"
+        serving: "何人分か"
+        title: "料理名"
+        introduction: "料理紹介"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
