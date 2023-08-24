@@ -37,7 +37,7 @@
             <%= user.label :is_deleted, "退会" %>
           </div>
         <div class="form-group col-11 d-flex justify-content-around">
-          <%= user.submit '変更を保存', class: "btn btn-success" %>
+          <%= user.submit '変更を保存', class: "btn btn-success", data: {confirm: "変更を保存しますか？"} %>
         </div>
       <% end %>
     </div>

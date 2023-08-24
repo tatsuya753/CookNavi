@@ -1,3 +1,5 @@
+// user/show.html.erbにjavascript_pack_tagを記載
+
 /* global $*/
 // turbolinksの無効化
 $(document).on('turbolinks:load', function() {

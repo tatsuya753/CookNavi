@@ -4,7 +4,7 @@
 
         <div class="col-12 text-center my-3"><%= image_tag @post_recipe.get_image(300, 300) %></div>
         <%= link_to user_path(@user) do %>
-        <div class="col-2 text-center my-3">by<%= @post_recipe.user.name %></div>
+        <div class="text-center my-3">by<%= @post_recipe.user.name %></div>
         <% end %>
 
         <div class="col-lg-2 text-center my-3">
@@ -23,7 +23,7 @@
         <div><%= @post_recipe.title %></div>
         </div>
 
-        <div class="col-12 text-center my-3">
+        <div class="col-7 text-center my-3">
         <h4>料理紹介</h4>
         <div><%= @post_recipe.introduction %></div>
         </div>
@@ -79,8 +79,10 @@
       <div class="row align-items-center overflow-auto border rounded p-2 ml-5" style="width:600px; height:250px;">
         <% @post_recipe.recipe_comments.each do |recipe_comment| %>
       <div class="col-3 text-center text-break">
+          <%= link_to user_path(recipe_comment.user) do %>
           <p><%= image_tag recipe_comment.user.get_profile_image(80, 80) %></p>
           <p><%= recipe_comment.user.name %></p>
+          <% end %>
       </div>
 
       <div class="col-7 d-flex align-items-center text-break border rounded">
@@ -88,7 +90,7 @@
         <%= recipe_comment.comment %>
       </div>
 
-             <div class="col-2 text-center d-flex align-items-center ">
+             <div class="col-2 text-center d-flex align-items-center">
             <% if recipe_comment.user == current_user %>
               <%= link_to "削除", post_recipe_recipe_comment_path(recipe_comment.post_recipe, recipe_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class: 'btn btn-md btn-danger text-white' %>
             <% end %>

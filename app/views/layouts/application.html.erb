@@ -14,25 +14,25 @@
 
   <body>
   <header>
+    <!-- 管理者がログインしている場合-->
+    <% if admin_signed_in? %>
     <nav class="navbar navbar-expand-lg border-bottom">
       <div class="col-lg-2">
-        <h2><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+        <h2><%= link_to 'LOGO', admin_root_path, class: "text-dark text-decoration-none" %></h2>
       </div>
 
-      <div class="col-lg-4 d-flex justify-content-center">
-        <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
-          <div class="input-group">
-            <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
-            <%= button_tag type: "submit", class: "btn btn-outline-light text-secondary form-control" do %>
-            <i class="fas fa-search"></i>
-            <% end %>
-        <% end %>
-           </div>
-      </div>
+        <div class="col-lg-4 d-flex justify-content-center">
+          <%= form_with url: admin_post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
+            <div class="input-group">
+              <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
+              <%= button_tag type: "submit", class: "btn btn-outline-light text-secondary form-control" do %>
+              <i class="fas fa-search"></i>
+              <% end %>
+          <% end %>
+             </div>
+        </div>
 
         <ul class="navbar-nav ml-auto">
-      <!-- 管理者がログインしている場合-->
-        <% if admin_signed_in? %>
           <li>
             <%= link_to admin_root_path, class: "mx-3 button text-decoration-none link-light" do %>
             <i class="fa-solid fa-users">会員一覧</i>
@@ -56,29 +56,67 @@
             <i class="fa-solid fa-right-from-bracket">ログアウト</i>
             <% end %>
           </li>
+        </ul>
+    </nav>
 
-      <!--ユーザー（会員）がログインしている場合 -->
-        <% elsif user_signed_in? %>
-          <li>
-            <%= link_to post_recipes_path, class: "mx-3 button text-decoration-none link-light" do %>
-            <i class="fa-solid fa-rectangle-list">投稿一覧</i>
+<!--ユーザー（会員）がログインしている場合 -->
+  <% elsif user_signed_in? %>
+    <nav class="navbar navbar-expand-lg border-bottom">
+      <div class="col-lg-2">
+        <h2><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+      </div>
+
+        <div class="col-lg-4 d-flex justify-content-center">
+          <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
+            <div class="input-group">
+              <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
+              <%= button_tag type: "submit", class: "btn btn-outline-light text-secondary form-control" do %>
+              <i class="fas fa-search"></i>
+              <% end %>
+          <% end %>
+            </div>
+        </div>
+
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <%= link_to post_recipes_path, class: "mx-3 button text-decoration-none link-light" do %>
+          <i class="fa-solid fa-rectangle-list">投稿一覧</i>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to user_path(current_user), data: {"turbolinks" => false}, class: "mx-3 button text-decoration-none link-light" do %>
+          <i class="fa-solid fa-user">マイページ</i>
+          <% end %>
+        </li>
+
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" do %>
+          <i class="fa-solid fa-right-from-bracket">ログアウト</i>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ログインしていない場合 -->
+    <% else %>
+    <nav class="navbar navbar-expand-lg border-bottom">
+      <div class="col-lg-2">
+        <h2><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+      </div>
+
+          <div class="col-lg-4 d-flex justify-content-center">
+            <%= form_with url: post_recipes_path, method: :get, local: true, class: 'boards__searchForm ml-5' do |f|%>
+              <div class="input-group">
+                <%= f.text_field :word, value: @word, class: "form-control w-50", placeholder: "キーワードを入力" %>
+                <%= button_tag type: "submit", class: "btn btn-outline-light text-secondary form-control" do %>
+                <i class="fas fa-search"></i>
+                <% end %>
             <% end %>
-          </li>
+              </div>
+          </div>
 
-          <li>
-            <%= link_to user_path(current_user), class: "mx-3 button text-decoration-none link-light" do %>
-            <i class="fa-solid fa-user">マイページ</i>
-            <% end %>
-          </li>
-
-          <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: "mx-3 button text-decoration-none link-light" do %>
-            <i class="fa-solid fa-right-from-bracket">ログアウト</i>
-            <% end %>
-          </li>
-
-      <!-- ログインしていない場合 -->
-        <% else %>
+        <ul class="navbar-nav ml-auto">
           <li>
             <%= link_to post_recipes_path, class: "mx-3 button text-decoration-none link-light" do %>
             <i class="fa-solid fa-rectangle-list">投稿一覧</i>
@@ -97,7 +135,7 @@
             <% end %>
           </li>
         <% end %>
-      </ul>
+        </ul>
     </nav>
   </header>
 
@@ -110,9 +148,10 @@
   </main>
 
     <footer>
-      <div>
-        <h4 class="logo text-center pt-5"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
-        <p class="text-center">プライバシーポリシー｜よくあるご質問｜お問い合わせ｜店舗案内</p>
+      <div class="text-center">
+        <h4 class="logo text-center"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
+        <h5 class="text-center my-4 text-light"><i class="fa-solid fa-utensils">おいしさがつながる、レシピのコミュニティ</i></h5>
+        <%= link_to "管理者はこちら", new_admin_session_path,class: "text-dark", style: "text-decoration: none;" %>
       </div>
     </footer>
   </body>

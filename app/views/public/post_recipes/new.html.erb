@@ -1,10 +1,12 @@
+<%= javascript_pack_tag 'image' %>
+
 <%= form_with model: @post_recipe do |post_recipe| %>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 text-center my-5"><h1>レシピ投稿</h1></div>
 
         <% if @post_recipe.errors.any? %>
-          <%= @post_recipe.errors.count %>件のエラーが発生しました
+          <h5 class="col-12 text-center"><%= @post_recipe.errors.count %>件のエラーが発生しました。</h5>
           <ul>
             <% @post_recipe.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -13,8 +15,12 @@
         <% end %>
 
       <div class="col-12 text-center mb-4">
-        <h4>画像</h4>
-        <%= post_recipe.file_field :image, accept: "image/*" %>
+          <h4>画像</h4>
+        <div class='image justify-content-center'>
+          <label class="labelName" for="imageSpace"></label>
+          <%= post_recipe.file_field :image, accept: "image/*", class: 'imageInput' %>
+        </div>
+        <div class="col-12 prevImageBox d-flex justify-content-center"></div>
       </div>
 
       <div class="col-12 text-center mb-4">
@@ -85,10 +91,10 @@
       </div>
 
 </div>
-    <div class="row justify-content-center mt-5 pb-5">
-      <div class="form-inline mx-auto">
+    <div class="row justify-content-center pb-5">
+      <div class="form-inline btn-group">
         <%= post_recipe.submit 'レシピを公開', :name => 'post', class: 'mr-5 btn btn-lg btn-warning text-white' %>
-        <%= post_recipe.submit '下書きに保存', :name => 'post_status', class: 'mr-5 btn btn-lg btn-outline-secondary' %>
+        <%= post_recipe.submit '下書きに保存', :name => 'post_status', class: 'btn btn-lg btn-outline-secondary' %>
       </div>
     </div>
 <% end %>
