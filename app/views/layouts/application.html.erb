@@ -18,7 +18,9 @@
     <% if admin_signed_in? %>
     <nav class="navbar navbar-expand-lg border-bottom">
       <div class="col-lg-1">
-        <h2><%= link_to 'LOGO', admin_root_path, class: "text-dark text-decoration-none" %></h2>
+        <%= link_to admin_root_path, class: "text-dark text-decoration-none" do %>
+          <a><%= image_tag 'logo.png', :size => '150x70' %></a>
+        <% end %>
       </div>
 
         <div class="col-lg-3 d-flex justify-content-center">
@@ -63,7 +65,9 @@
   <% elsif user_signed_in? %>
     <nav class="navbar navbar-expand-lg border-bottom">
       <div class="col-lg-2">
-        <h2><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+        <%= link_to root_path, class: "text-dark text-decoration-none" do %>
+          <a><%= image_tag 'logo.png', :size => '150x70' %></a>
+        <% end %>
       </div>
 
         <div class="col-lg-4 d-flex justify-content-center">
@@ -102,7 +106,9 @@
     <% else %>
     <nav class="navbar navbar-expand-lg border-bottom">
       <div class="col-lg-2">
-        <h2><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h2>
+        <%= link_to root_path, class: "text-dark text-decoration-none" do %>
+          <a><%= image_tag 'logo.png', :size => '150x70' %></a>
+        <% end %>
       </div>
 
           <div class="col-lg-4 d-flex justify-content-center">
@@ -149,8 +155,8 @@
 
     <footer>
       <div class="text-center">
-        <h4 class="logo text-center"><%= link_to 'LOGO', root_path, class: "text-dark text-decoration-none" %></h4>
-        <h5 class="text-center my-4 text-light"><i class="fa-solid fa-utensils">おいしさがつながる、レシピのコミュニティ</i></h5>
+        <a><%= image_tag 'logo.png', :size => '150x70' %></a>
+          <h5 class="text-center my-1 text-light"><i class="fa-solid fa-utensils">おいしさがつながる、レシピのコミュニティ</i></h5>
         <%= link_to "管理者はこちら", new_admin_session_path,class: "text-dark", style: "text-decoration: none;" %>
       </div>
     </footer>
