@@ -16,8 +16,8 @@
   <header>
     <!-- 管理者がログインしている場合-->
     <% if admin_signed_in? %>
-    <nav class="navbar navbar-expand-lg border-bottom">
-      <div class="col-lg-1">
+    <nav class="navbar navbar-expand-xl border-bottom">
+      <div class="col-lg-2">
         <%= link_to admin_root_path, class: "text-dark text-decoration-none" do %>
           <a><%= image_tag 'logo.png', :size => '150x70' %></a>
         <% end %>
