@@ -12,7 +12,8 @@ class Public::PostRecipesController < ApplicationController
     elsif params[:word]
           @post_recipes = PostRecipe.where(post_status: false).looks(params[:word]).page(params[:page])
     else
-          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user]).page(params[:page])
+          @post_recipes = PostRecipe.where(post_status: false).order(created_at: :desc).includes(:kept_users).sort {|a,b| b.kept_users.size <=> a.kept_users.size}
+          @post_recipes = Kaminari.paginate_array(@post_recipes).page(params[:page])
     end
   end
 
