@@ -109,7 +109,7 @@ private
   def correct_post
     @post_recipe = PostRecipe.find(params[:id])
     unless @post_recipe.user.id == current_user.id
-        redirect_to post_recipe_path, alert: 'このページへは遷移できません。'
+        redirect_to post_recipes_path, alert: 'このページへは遷移できません。'
     end
   end
 
