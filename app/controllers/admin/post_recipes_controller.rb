@@ -1,4 +1,5 @@
 class Admin::PostRecipesController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @recipe_comment = RecipeComment.all
