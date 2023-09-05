@@ -58,7 +58,7 @@ GitHubでの工程（作業ブランチ作成 → 開発 → プッシュ → �
 ![CookNavi 画面遷移図-管理者側画面遷移図 drawio](https://github.com/tatsuya753/CookNavi/assets/133572109/45bb5c1d-556d-46a9-b5e2-e198e8cdffca)
 
 #### 開発環境
-- OS：Linux(CentOS)
+- OS：Linux(Amazon Linux 2)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails, Bootstrap
 - JSライブラリ：jQuery
