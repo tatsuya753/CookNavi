@@ -1,5 +1,6 @@
 class Public::PostRecipesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :correct_post, only: [:edit, :update]
 
   def index
     @recipe_comment = RecipeComment.all
@@ -12,7 +13,8 @@ class Public::PostRecipesController < ApplicationController
     elsif params[:word]
           @post_recipes = PostRecipe.where(post_status: false).looks(params[:word]).page(params[:page])
     else
-          @post_recipes = PostRecipe.all.where(post_status: false).includes([:user]).page(params[:page])
+          @post_recipes = PostRecipe.where(post_status: false).order(created_at: :desc).includes(:kept_users).sort {|a,b| b.kept_users.size <=> a.kept_users.size}
+          @post_recipes = Kaminari.paginate_array(@post_recipes).page(params[:page])
     end
   end
 
@@ -94,11 +96,22 @@ class Public::PostRecipesController < ApplicationController
 
   def destroy
     post_recipe = PostRecipe.find(params[:id])
-    post_recipe.destroy
-    redirect_to user_path(current_user), notice: "レシピを削除しました！"
+    if  @post_recipe.user_id == current_user.id
+        post_recipe.destroy
+        redirect_to user_path(current_user), notice: "レシピを削除しました！"
+    else
+        redirect_to post_recipes_path, alert: "他人の投稿は削除できません"
+    end
   end
 
 private
+
+  def correct_post
+    @post_recipe = PostRecipe.find(params[:id])
+    unless @post_recipe.user.id == current_user.id
+        redirect_to post_recipes_path, alert: 'このページへは遷移できません。'
+    end
+  end
 
   def post_recipe_params
     params.require(:post_recipe).permit(

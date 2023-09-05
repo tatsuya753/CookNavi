@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :post_recipes, dependent: :destroy
   has_many :recipe_comments, dependent: :destroy
   has_many :keeps, dependent: :destroy
+  has_many :liked_post_recipes, through: :keeps, source: :post_recipe
 
   has_one_attached :profile_image
 

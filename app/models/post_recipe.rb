@@ -5,6 +5,7 @@ class PostRecipe < ApplicationRecord
 
   has_many :recipe_comments, dependent: :destroy
   has_many :keeps, dependent: :destroy
+  has_many :kept_users, through: :keeps, source: :user
   has_many :ingredients, dependent: :destroy
   has_many :procedures, dependent: :destroy
   has_one_attached :image

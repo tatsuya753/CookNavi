@@ -1,5 +1,17 @@
 # CookNavi
+**CookNaviは、料理のレシピを投稿＆シェアするWebアプリケーションです！**
 
+![スクリーンショット 2023-08-25 175950](https://github.com/tatsuya753/CookNavi/assets/133572109/bde94648-7616-4eda-8aaf-48d08f2b1330)
+
+```
+【管理者アカウント】
+   メールアドレス： admin@admin
+   パスワード： testlogin
+
+ ※別途「ゲストログイン機能」（ワンクリックでログインが可能な機能）も実装しています.
+ ぜひそちらもご利用ください。
+```
+URL: http://3.112.128.235/
 ## サイト概要
 
 ### サイトテーマ
@@ -22,13 +34,38 @@
 - 自分のレシピを他人に評価してほしいとき
 - 自分のレシピを投稿したいとき
 
+### 工夫・意識したポイント
+
+**1.ユーザーの視点を意識しました。**
+- 投稿フォームにおける入力欄の追加・削除機能
+- 下書き保存機能
+- 画像のプレビュー機能
+
+**2.チーム開発を意識**
+個人開発ではありましたが、業務では常にチーム開発となることから、
+GitHubでの工程（作業ブランチ作成 → 開発 → プッシュ → プルリク発行 → レビュー → developブランチへのマージ等）
+を意識し取り組みました。
+
 ## 設計書
-作成予定
+#### ◆ER図
+![CookNavi_ER図 drawio](https://github.com/tatsuya753/CookNavi/assets/133572109/31c1fab0-a330-4e2f-934b-e4d86e865b08)
+
+#### ◆UI Flow
+**会員側**
+![CookNavi 画面遷移図-会員側画面遷移図 drawio](https://github.com/tatsuya753/CookNavi/assets/133572109/add85cbc-3500-4a2a-8254-34b33f396dc4)
+
+**管理者側**
+![CookNavi 画面遷移図-管理者側画面遷移図 drawio](https://github.com/tatsuya753/CookNavi/assets/133572109/45bb5c1d-556d-46a9-b5e2-e198e8cdffca)
 
 #### 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
+- フレームワーク：Ruby on Rails, Bootstrap
 - JSライブラリ：jQuery
 - IDE：Cloud9
--
+
+## 使用素材
+
+**【画像素材】**
+- 【PAKUTASO】 https://www.pakutaso.com/
+

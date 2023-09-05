@@ -75,7 +75,7 @@
     <!--タブ、下書き保存したレシピ-->
     <div class="tabbox">
       <% if @draft_posts.empty? %>
-            <h6>下書き中のレシピはまだありません。</h6>
+            <h6 class='mt-4'>下書き中のレシピはまだありません。</h6>
           <% else %>
             <table style="width: 90%" class="table ml-2">
             <% @draft_posts.each do |draft_post| %>
