@@ -15,8 +15,13 @@ class Public::RecipeCommentsController < ApplicationController
   end
 
   def destroy
-    RecipeComment.find(params[:id]).destroy
-    redirect_to post_recipe_path(params[:post_recipe_id]), notice: "コメントを削除しました！"
+    @recipe_comment = RecipeComment.find(params[:id])
+    if  @recipe_comment.user_id == current_user.id
+        @recipe_comment.destroy
+        redirect_to post_recipe_path(params[:post_recipe_id]), notice: "コメントを削除しました！"
+    else
+        redirect_to post_recipe_path(params[:post_recipe_id]), alert: "コメントを削除できません"
+    end
   end
 
   private
