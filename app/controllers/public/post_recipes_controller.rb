@@ -96,7 +96,7 @@ class Public::PostRecipesController < ApplicationController
 
   def destroy
     post_recipe = PostRecipe.find(params[:id])
-    if  @post_recipe.user_id == current_user.id
+    if  post_recipe.user.id == current_user.id
         post_recipe.destroy
         redirect_to user_path(current_user), notice: "レシピを削除しました！"
     else
